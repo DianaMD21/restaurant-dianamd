@@ -1,6 +1,5 @@
 package entities;
 
-
 public class Employee extends User{
     private Long code;
 
