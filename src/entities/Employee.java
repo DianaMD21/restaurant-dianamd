@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.Objects;
 
 public class Employee extends User{
     private Long code;
