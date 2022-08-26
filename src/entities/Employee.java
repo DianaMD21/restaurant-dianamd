@@ -9,10 +9,6 @@ public class Employee extends User{
         super();
     }
 
-    public Employee(Long id) {
-        super(id);
-    }
-
     public Long getCode() {
         return code;
     }
