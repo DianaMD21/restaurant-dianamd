@@ -21,7 +21,7 @@ This project is conformed by multiple entities.
 
 ## Entities:
 > - Cashier: Is responsible for charging the order.
-> - Chef: Is responsible for cooking the food of the order, it has the properties of Employee as well as its experience.
+> - Chef: Is responsible for cooking the food of the order, it has an attribute called YearsOfExperience, which specifies the years of experience a chef has, because this information will be taken into account when calculating how long it will take to prepare an order.
 > - Client: Is responsible for ordering the food and paying.
 > - Waiter: Is responsible for taking the order.
 > - Employee: It's a general entity that has the properties of User. Every employee of the restaurant has the properties of Employee.
@@ -34,3 +34,4 @@ This project is conformed by multiple entities.
 > - Stock: Entity that has the information of each product (ingredient) that the restaurant has.
 > - StockProduct: Entity that has the information of ONE product in stock.
 > - Person: Entity that has the information of all the different people that eat/work in the restaurant.
+    ![Diagrama](https://user-images.githubusercontent.com/68748760/187987141-a85bc977-1ae2-4315-9535-51f9da0cfeb2.png)
