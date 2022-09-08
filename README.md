@@ -35,3 +35,4 @@ This project is conformed by multiple entities.
 > - StockProduct: Entity that has the information of ONE product in stock.
 > - Person: Entity that has the information of all the different people that eat/work in the restaurant.
     ![Diagrama](https://user-images.githubusercontent.com/68748760/187987141-a85bc977-1ae2-4315-9535-51f9da0cfeb2.png)
+    ![product diagram](https://user-images.githubusercontent.com/68748760/189142265-d22ad4a4-9fce-4933-95dc-6db12210e237.png)
