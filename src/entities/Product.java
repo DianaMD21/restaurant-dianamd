@@ -2,10 +2,13 @@ package entities;
 
 import enums.MeasureUnit;
 
+import java.util.List;
+
 public class Product extends BaseEntity<Long>{
     private String name;
     private Double price;
     private MeasureUnit measureUnit;
+    private List<FinalProductProduct> finalProductProducts;
 
     public Product() {
     }
@@ -32,5 +35,13 @@ public class Product extends BaseEntity<Long>{
 
     public void setMeasureUnit(MeasureUnit measureUnit) {
         this.measureUnit = measureUnit;
+    }
+
+    public List<FinalProductProduct> getFinalProductProducts() {
+        return finalProductProducts;
+    }
+
+    public void setFinalProductProducts(List<FinalProductProduct> finalProductProducts) {
+        this.finalProductProducts = finalProductProducts;
     }
 }
