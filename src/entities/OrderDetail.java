@@ -1,8 +1,12 @@
 package entities;
 
+import java.util.List;
+
 public class OrderDetail extends BaseEntity<Long>{
     private Product product;
-    private Long quantity;
+    private Double quantity;
+    private Double price;
+    private List<TaxOrderDetail> taxesOrderDetail;
 
     public OrderDetail() {
     }
@@ -15,12 +19,28 @@ public class OrderDetail extends BaseEntity<Long>{
         this.product = product;
     }
 
-    public Long getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public List<TaxOrderDetail> getTaxesOrderDetail() {
+        return taxesOrderDetail;
+    }
+
+    public void setTaxesOrderDetail(List<TaxOrderDetail> taxesOrderDetail) {
+        this.taxesOrderDetail = taxesOrderDetail;
     }
 }
 
