@@ -5,6 +5,7 @@ public class OrderDetailTax extends BaseEntity<Long>{
     private OrderDetailProduct orderDetailProduct;
     private String taxName;
     private Double taxPercentage;
+    private OrderDetail orderDetail;
 
     public OrderDetailTax() {
     }
@@ -39,5 +40,13 @@ public class OrderDetailTax extends BaseEntity<Long>{
 
     public void setTaxPercentage(Double taxPercentage) {
         this.taxPercentage = taxPercentage;
+    }
+
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
     }
 }

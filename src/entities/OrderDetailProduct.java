@@ -10,6 +10,7 @@ public class OrderDetailProduct extends BaseEntity<Long>{
     private Double price;
     private MeasureUnitEnum measureUnit;
     private List<OrderDetailTax> orderDetailTaxes;
+    private OrderDetail orderDetail;
 
     public OrderDetailProduct() {
     }
@@ -52,5 +53,13 @@ public class OrderDetailProduct extends BaseEntity<Long>{
 
     public void setOrderDetailTaxes(List<OrderDetailTax> orderDetailTaxes) {
         this.orderDetailTaxes = orderDetailTaxes;
+    }
+
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
     }
 }
