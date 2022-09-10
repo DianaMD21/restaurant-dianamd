@@ -1,6 +1,6 @@
 package enums;
 
-public enum MeasureUnit {
+public enum MeasureUnitEnum {
     POUNDS,
     GRAMS,
     UNIT,

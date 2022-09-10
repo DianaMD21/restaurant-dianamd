@@ -1,12 +1,12 @@
 package entities;
 
-import enums.MeasureUnit;
+import enums.MeasureUnitEnum;
 
 public class OrderDetailProduct extends BaseEntity<Long>{
     private FinalProduct finalProduct;
     private String name;
     private Double price;
-    private MeasureUnit measureUnit;
+    private MeasureUnitEnum measureUnit;
 
     public OrderDetailProduct() {
     }
@@ -35,11 +35,11 @@ public class OrderDetailProduct extends BaseEntity<Long>{
         this.price = price;
     }
 
-    public MeasureUnit getMeasureUnit() {
+    public MeasureUnitEnum getMeasureUnit() {
         return measureUnit;
     }
 
-    public void setMeasureUnit(MeasureUnit measureUnit) {
-        this.measureUnit = measureUnit;
+    public void setMeasureUnit(MeasureUnitEnum measureUnitEnum) {
+        this.measureUnit = measureUnitEnum;
     }
 }
