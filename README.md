@@ -23,7 +23,7 @@ This project is conformed by multiple entities.
 > - Cashier: Is responsible for charging the order.
 > - Chef: Is responsible for cooking the food of the order, it has an attribute called YearsOfExperience, which specifies the years of experience a chef has, because this information will be taken into account when calculating how long it will take to prepare an order.
 > - Client: Is responsible for ordering the food and paying.
-> - Waiter: Is responsible for taking the order.
+> - Waiter: Is responsible for taking the order, and bringing the food to the client's table.
 > - Employee: It's a general entity that has the properties of User. Every employee of the restaurant has the properties of Employee.
 > - FinalProduct: It's responsible to hold a list of products that conforms a plate.
 > - Product: Entity that has the information of an specific product. That product can be as simple as a loaf of bread and as complex as a pizza.
