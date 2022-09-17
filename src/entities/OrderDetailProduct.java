@@ -2,11 +2,14 @@ package entities;
 
 import enums.MeasureUnitEnum;
 
+import java.util.List;
+
 public class OrderDetailProduct extends BaseEntity<Long>{
     private FinalProduct finalProduct;
     private String name;
     private Double price;
     private MeasureUnitEnum measureUnit;
+    private List<OrderDetailTax> orderDetailTaxes;
 
     public OrderDetailProduct() {
     }
@@ -39,7 +42,15 @@ public class OrderDetailProduct extends BaseEntity<Long>{
         return measureUnit;
     }
 
-    public void setMeasureUnit(MeasureUnitEnum measureUnitEnum) {
-        this.measureUnit = measureUnitEnum;
+    public void setMeasureUnit(MeasureUnitEnum measureUnit) {
+        this.measureUnit = measureUnit;
+    }
+
+    public List<OrderDetailTax> getOrderDetailTaxes() {
+        return orderDetailTaxes;
+    }
+
+    public void setOrderDetailTaxes(List<OrderDetailTax> orderDetailTaxes) {
+        this.orderDetailTaxes = orderDetailTaxes;
     }
 }
