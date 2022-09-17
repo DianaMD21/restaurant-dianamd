@@ -7,6 +7,7 @@ public class OrderDetail extends BaseEntity<Long>{
     private Double quantity;
     private Double price;
     private List<OrderDetailTax> orderDetailTaxes;
+    private ChefOrderDetail chefOrderDetail;
 
     public OrderDetail() {
     }
@@ -41,6 +42,14 @@ public class OrderDetail extends BaseEntity<Long>{
 
     public void setOrderDetailTaxes(List<OrderDetailTax> orderDetailTaxes) {
         this.orderDetailTaxes = orderDetailTaxes;
+    }
+
+    public ChefOrderDetail getChefOrderDetail() {
+        return chefOrderDetail;
+    }
+
+    public void setChefOrderDetail(ChefOrderDetail chefOrderDetail) {
+        this.chefOrderDetail = chefOrderDetail;
     }
 }
 
