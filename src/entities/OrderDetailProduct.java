@@ -6,9 +6,9 @@ import java.util.List;
 
 public class OrderDetailProduct extends BaseEntity<Long>{
     private FinalProduct finalProduct;
-    private String name;
-    private Double price;
-    private MeasureUnitEnum measureUnit;
+    private String productName;
+    private Double productPrice;
+    private MeasureUnitEnum productMeasureUnit;
     private List<OrderDetailTax> orderDetailTaxes;
 
     public OrderDetailProduct() {
@@ -22,28 +22,28 @@ public class OrderDetailProduct extends BaseEntity<Long>{
         this.finalProduct = finalProduct;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public MeasureUnitEnum getMeasureUnit() {
-        return measureUnit;
+    public MeasureUnitEnum getProductMeasureUnit() {
+        return productMeasureUnit;
     }
 
-    public void setMeasureUnit(MeasureUnitEnum measureUnit) {
-        this.measureUnit = measureUnit;
+    public void setProductMeasureUnit(MeasureUnitEnum productMeasureUnit) {
+        this.productMeasureUnit = productMeasureUnit;
     }
 
     public List<OrderDetailTax> getOrderDetailTaxes() {
