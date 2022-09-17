@@ -11,6 +11,7 @@ public class Order extends BaseEntity<Long>{
     private List<OrderDetail> orderDetails;
     private Double total;
     private OrderStatusEnum orderStatusEnum;
+    private List<OrderTax> orderTaxes;
 
     public Order() {
     }
@@ -61,5 +62,13 @@ public class Order extends BaseEntity<Long>{
 
     public void setOrderStatusEnum(OrderStatusEnum orderStatusEnum) {
         this.orderStatusEnum = orderStatusEnum;
+    }
+
+    public List<OrderTax> getOrderTaxes() {
+        return orderTaxes;
+    }
+
+    public void setOrderTaxes(List<OrderTax> orderTaxes) {
+        this.orderTaxes = orderTaxes;
     }
 }
