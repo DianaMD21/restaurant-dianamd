@@ -1,21 +1,10 @@
 package entities;
 
-public class OrderDetailTax extends BaseEntity<Long>{
-    private Tax tax;
+public class OrderDetailTax extends DefaultTaxHistory {
     private OrderDetailProduct orderDetailProduct;
-    private String taxName;
-    private Double taxPercentage;
     private OrderDetail orderDetail;
 
     public OrderDetailTax() {
-    }
-
-    public Tax getTax() {
-        return tax;
-    }
-
-    public void setTax(Tax tax) {
-        this.tax = tax;
     }
 
     public OrderDetailProduct getOrderDetailProduct() {
@@ -24,22 +13,6 @@ public class OrderDetailTax extends BaseEntity<Long>{
 
     public void setOrderDetailProduct(OrderDetailProduct orderDetailProduct) {
         this.orderDetailProduct = orderDetailProduct;
-    }
-
-    public String getTaxName() {
-        return taxName;
-    }
-
-    public void setTaxName(String taxName) {
-        this.taxName = taxName;
-    }
-
-    public Double getTaxPercentage() {
-        return taxPercentage;
-    }
-
-    public void setTaxPercentage(Double taxPercentage) {
-        this.taxPercentage = taxPercentage;
     }
 
     public OrderDetail getOrderDetail() {
