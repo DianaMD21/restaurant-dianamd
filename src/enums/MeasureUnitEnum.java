@@ -1,9 +1,9 @@
 package enums;
 
 public enum MeasureUnitEnum {
-    POUNDS,
-    GRAMS,
-    UNIT,
-    GALLONS,
-    OUNCES
+  POUNDS,
+  GRAMS,
+  UNIT,
+  GALLONS,
+  OUNCES
 }
