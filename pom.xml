@@ -72,9 +72,11 @@
                     <execution>
                         <id>checkstyle-validation</id>
                         <phase>validate</phase>
+
                         <goals>
                             <goal>check</goal>
                         </goals>
+
                     </execution>
                 </executions>
             </plugin>
