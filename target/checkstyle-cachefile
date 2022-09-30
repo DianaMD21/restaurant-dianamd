@@ -1,0 +1,4 @@
+#Fri Sep 30 11:44:10 BOT 2022
+configuration*?=F03AA081F91036A5EF469ED70BEB0E8BCB09B78B
+module-resource*?\:checkstyle-xpath-suppressions.xml=9E908DA6CEE52377F802F99960BF5A53C00062B3
+module-resource*?\:checkstyle-suppressions.xml=30E94346D5D78509C7BA25386F30F00313209342
