@@ -58,10 +58,12 @@
                 </dependencies>
                 <configuration>
                     <configLocation>
-                        src/checkstyle.xml
+                        checkstyle.xml
 
                     </configLocation>
+                    <sourceDirectories>src</sourceDirectories>
                     <encoding>UTF-8</encoding>
+
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <failOnViolation>true</failOnViolation>
