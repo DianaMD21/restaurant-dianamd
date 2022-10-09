@@ -1,7 +1,7 @@
 package entities;
 
-public class Cashier extends Employee{
-    public Cashier() {
-        super();
-    }
+public class Cashier extends Employee {
+  public Cashier() {
+    super();
+  }
 }
