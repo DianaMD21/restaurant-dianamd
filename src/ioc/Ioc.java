@@ -22,13 +22,16 @@ public class Ioc {
     Optional.ofNullable(key).orElseThrow(IocKeyNullPointerException::new);
     Optional.ofNullable(key)
         .filter(this.instanceMap::containsKey)
-        .orElseThrow(IocDuplicatedKeyException::new);
+        .ifPresent(
+            s -> {
+              throw new IocDuplicatedKeyException();
+            });
     Optional.ofNullable(value).orElseThrow(IocValueNullPointerException::new);
-
     this.instanceMap.put(key, value);
   }
 
   public <T> T get(String key) {
+    Optional.ofNullable(key).orElseThrow(IocKeyNullPointerException::new);
     return (T) Optional.ofNullable(instanceMap.get(key)).orElseThrow(IocKeyNotFoundException::new);
   }
 }
