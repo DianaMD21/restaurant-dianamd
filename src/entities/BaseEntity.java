@@ -1,5 +1,6 @@
 package entities;
 
+import enums.StatusEnum;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -8,7 +9,7 @@ public abstract class BaseEntity<T extends Serializable> {
   private T id;
   private T updatedby;
   private T createdBy;
-  private String status;
+  private StatusEnum status;
   private Instant createdAt;
   private Instant updatedAt;
 
@@ -38,11 +39,11 @@ public abstract class BaseEntity<T extends Serializable> {
     this.createdBy = createdBy;
   }
 
-  public String getStatus() {
+  public StatusEnum getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(StatusEnum status) {
     this.status = status;
   }
 
