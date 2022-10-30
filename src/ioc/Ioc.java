@@ -8,6 +8,7 @@ import exceptions.ioc.IocValueNullPointerException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import services.implementation.CashierServiceImpl;
 import services.implementation.ClientServiceImpl;
 
 public class Ioc {
@@ -20,6 +21,7 @@ public class Ioc {
 
   private void registerServices(Map<String, Object> instanceMap) {
     instanceMap.put(IocServices.CLIENT_SERVICE_INSTANCE, new ClientServiceImpl());
+    instanceMap.put(IocServices.CASHIER_SERVICE_INSTANCE, new CashierServiceImpl());
   }
 
   public static Ioc getInstance() {
