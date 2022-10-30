@@ -1,5 +1,6 @@
 package services.implementation;
 
+import entities.Client;
 import enums.StatusEnum;
 import exceptions.services.EntityNotFoundException;
 import exceptions.services.IdNullPointerException;
@@ -55,12 +56,12 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
-  public Optional<entities.Client> update(entities.Client entity) {
-    Optional.ofNullable(entity).orElseThrow(NullEntityException::new);
-    Optional.ofNullable(entity.getId()).orElseThrow(IdNullPointerException::new);
-    var client = this.findById(entity.getId()).get();
-    entity.setUpdatedAt(Instant.now());
-    UserUtil.fetchUser(client, entity);
+  public Optional<entities.Client> update(Client clientExample) {
+    Optional.ofNullable(clientExample).orElseThrow(NullEntityException::new);
+    Optional.ofNullable(clientExample.getId()).orElseThrow(IdNullPointerException::new);
+    var client = this.findById(clientExample.getId()).get();
+    clientExample.setUpdatedAt(Instant.now());
+    UserUtil.fetchUser(client, clientExample);
     return Optional.of(client);
   }
 
