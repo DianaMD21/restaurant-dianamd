@@ -1,5 +1,6 @@
 package ioc;
 
+import enums.IocServices;
 import exceptions.ioc.IocDuplicatedKeyException;
 import exceptions.ioc.IocKeyNotFoundException;
 import exceptions.ioc.IocKeyNullPointerException;
@@ -7,12 +8,19 @@ import exceptions.ioc.IocValueNullPointerException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import services.implementation.ClientServiceImpl;
 
 public class Ioc {
   private static Ioc instance;
   private final Map<String, Object> instanceMap = new HashMap<>();
 
-  private Ioc() {}
+  private Ioc() {
+    this.registerServices(this.instanceMap);
+  }
+
+  private void registerServices(Map<String, Object> instanceMap) {
+    instanceMap.put(IocServices.CLIENT_SERVICE_INSTANCE, new ClientServiceImpl());
+  }
 
   public static Ioc getInstance() {
     return Optional.ofNullable(instance).orElseGet(Ioc::new);
