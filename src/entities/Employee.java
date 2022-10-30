@@ -1,17 +1,17 @@
 package entities;
 
 public class Employee extends User {
-  private Long code;
+  private String code;
 
   public Employee() {
     super();
   }
 
-  public Long getCode() {
+  public String getCode() {
     return code;
   }
 
-  public void setCode(Long code) {
+  public void setCode(String code) {
     this.code = code;
   }
 }

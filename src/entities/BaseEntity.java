@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public abstract class BaseEntity<T extends Serializable> {
   private T id;
-  private T updatedby;
+  private T updatedBy;
   private T createdBy;
   private StatusEnum status;
   private Instant createdAt;
@@ -23,12 +23,12 @@ public abstract class BaseEntity<T extends Serializable> {
     this.id = id;
   }
 
-  public T getUpdatedby() {
-    return updatedby;
+  public T getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(T updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(T updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
   public T getCreatedBy() {
