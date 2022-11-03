@@ -3,7 +3,7 @@ package services.interfaces;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface BaseEntityService<E, K> {
+public interface BaseService<E, K> {
   Optional<E> insert(E entity);
 
   Optional<E> findById(K id);
