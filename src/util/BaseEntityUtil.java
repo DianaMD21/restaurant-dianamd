@@ -5,6 +5,7 @@ import entities.Cashier;
 import entities.Chef;
 import entities.Client;
 import entities.Product;
+import entities.Waiter;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -23,7 +24,9 @@ public final class BaseEntityUtil {
           Product.class,
           (Product target, Product source) -> ProductUtil.fetchProduct(target, source),
           Chef.class,
-          (Chef target, Chef source) -> ChefUtil.fetchChef(target, source));
+          (Chef target, Chef source) -> ChefUtil.fetchChef(target, source),
+          Waiter.class,
+          (Waiter target, Waiter source) -> WaiterUtil.fetchWaiter(target, source));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
