@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import services.implementation.CashierServiceImpl;
+import services.implementation.ChefServiceImpl;
 import services.implementation.ClientServiceImpl;
 import services.implementation.ProductServiceImpl;
 
@@ -24,6 +25,7 @@ public class Ioc {
     instanceMap.put(IocServices.CLIENT_SERVICE_INSTANCE, new ClientServiceImpl());
     instanceMap.put(IocServices.CASHIER_SERVICE_INSTANCE, new CashierServiceImpl());
     instanceMap.put(IocServices.PRODUCT_SERVICE_INSTANCE, new ProductServiceImpl());
+    instanceMap.put(IocServices.CHEF_SERVICE_INSTANCE, new ChefServiceImpl());
   }
 
   public static Ioc getInstance() {
