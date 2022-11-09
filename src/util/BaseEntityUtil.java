@@ -2,6 +2,7 @@ package util;
 
 import entities.BaseEntity;
 import entities.Cashier;
+import entities.Chef;
 import entities.Client;
 import entities.Product;
 import java.util.Map;
@@ -20,7 +21,9 @@ public final class BaseEntityUtil {
           Cashier.class,
           (Cashier target, Cashier source) -> CashierUtil.fetchCashier(target, source),
           Product.class,
-          (Product target, Product source) -> ProductUtil.fetchProduct(target, source));
+          (Product target, Product source) -> ProductUtil.fetchProduct(target, source),
+          Chef.class,
+          (Chef target, Chef source) -> ChefUtil.fetchChef(target, source));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
