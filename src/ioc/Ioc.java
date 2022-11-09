@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import services.implementation.CashierServiceImpl;
 import services.implementation.ClientServiceImpl;
+import services.implementation.ProductServiceImpl;
 
 public class Ioc {
   private static Ioc instance;
@@ -22,6 +23,7 @@ public class Ioc {
   private void registerServices(Map<String, Object> instanceMap) {
     instanceMap.put(IocServices.CLIENT_SERVICE_INSTANCE, new ClientServiceImpl());
     instanceMap.put(IocServices.CASHIER_SERVICE_INSTANCE, new CashierServiceImpl());
+    instanceMap.put(IocServices.PRODUCT_SERVICE_INSTANCE, new ProductServiceImpl());
   }
 
   public static Ioc getInstance() {
