@@ -27,9 +27,7 @@ public final class CashierServiceFixtures {
 
   public static Cashier buildCashier(Cashier cashierExample) {
     var cashier = new Cashier();
-    cashier.setCode(
-        Optional.ofNullable(cashierExample).map(Cashier::getCode).orElse("testing-code"));
-    UserFixtures.buildUser(cashier, cashierExample);
+    EmployeeFixtures.buildEmployee(cashier, cashierExample);
     return cashier;
   }
 }

@@ -27,7 +27,6 @@ public final class ChefServiceFixtures {
 
   public static Chef buildChef(Chef chefExample) {
     var chef = new Chef();
-    chef.setCode(Optional.ofNullable(chefExample).map(Chef::getCode).orElse("testing-code"));
     EmployeeFixtures.buildEmployee(chef, chefExample);
     return chef;
   }
