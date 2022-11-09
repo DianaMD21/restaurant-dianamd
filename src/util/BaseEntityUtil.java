@@ -3,6 +3,7 @@ package util;
 import entities.BaseEntity;
 import entities.Cashier;
 import entities.Client;
+import entities.Product;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -14,9 +15,12 @@ public final class BaseEntityUtil {
       Map.of(Long.class, (Long currentId) -> currentId + 1);
   public static final Map<Class<?>, BiFunction<?, ?, ?>> ENTITY_TO_FETCH_FUNCTION_MAP =
       Map.of(
-          Client.class, (Client target, Client source) -> ClientUtil.fetchClient(target, source),
+          Client.class,
+          (Client target, Client source) -> ClientUtil.fetchClient(target, source),
           Cashier.class,
-              (Cashier target, Cashier source) -> CashierUtil.fetchCashier(target, source));
+          (Cashier target, Cashier source) -> CashierUtil.fetchCashier(target, source),
+          Product.class,
+          (Product target, Product source) -> ProductUtil.fetchProduct(target, source));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
