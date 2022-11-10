@@ -12,6 +12,7 @@ import services.implementation.CashierServiceImpl;
 import services.implementation.ChefServiceImpl;
 import services.implementation.ClientServiceImpl;
 import services.implementation.ProductServiceImpl;
+import services.implementation.WaiterServiceImpl;
 
 public class Ioc {
   private static Ioc instance;
@@ -26,6 +27,7 @@ public class Ioc {
     instanceMap.put(IocServices.CASHIER_SERVICE_INSTANCE, new CashierServiceImpl());
     instanceMap.put(IocServices.PRODUCT_SERVICE_INSTANCE, new ProductServiceImpl());
     instanceMap.put(IocServices.CHEF_SERVICE_INSTANCE, new ChefServiceImpl());
+    instanceMap.put(IocServices.WAITER_SERVICE_INSTANCE, new WaiterServiceImpl());
   }
 
   public static Ioc getInstance() {

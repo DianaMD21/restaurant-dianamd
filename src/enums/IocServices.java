@@ -5,4 +5,5 @@ public final class IocServices {
   public static final String CASHIER_SERVICE_INSTANCE = "cashierService";
   public static final String PRODUCT_SERVICE_INSTANCE = "productService";
   public static final String CHEF_SERVICE_INSTANCE = "chefService";
+  public static final String WAITER_SERVICE_INSTANCE = "waiterService";
 }
