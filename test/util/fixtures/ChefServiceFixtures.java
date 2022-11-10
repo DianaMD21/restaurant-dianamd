@@ -2,7 +2,6 @@ package util.fixtures;
 
 import entities.Chef;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -27,7 +26,6 @@ public final class ChefServiceFixtures {
 
   public static Chef buildChef(Chef chefExample) {
     var chef = new Chef();
-    chef.setCode(Optional.ofNullable(chefExample).map(Chef::getCode).orElse("testing-code"));
     EmployeeFixtures.buildEmployee(chef, chefExample);
     return chef;
   }
