@@ -4,6 +4,7 @@ import entities.BaseEntity;
 import entities.Cashier;
 import entities.Chef;
 import entities.Client;
+import entities.FinalProduct;
 import entities.Product;
 import entities.Waiter;
 import java.util.Map;
@@ -26,7 +27,10 @@ public final class BaseEntityUtil {
           Chef.class,
           (Chef target, Chef source) -> ChefUtil.fetchChef(target, source),
           Waiter.class,
-          (Waiter target, Waiter source) -> WaiterUtil.fetchWaiter(target, source));
+          (Waiter target, Waiter source) -> WaiterUtil.fetchWaiter(target, source),
+          FinalProduct.class,
+          (FinalProduct target, FinalProduct source) ->
+              FinalProductUtil.fetchFinalProduct(target, source));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
