@@ -11,6 +11,7 @@ import java.util.Optional;
 import services.implementation.CashierServiceImpl;
 import services.implementation.ChefServiceImpl;
 import services.implementation.ClientServiceImpl;
+import services.implementation.FinalProductProductServiceImpl;
 import services.implementation.FinalProductServiceImpl;
 import services.implementation.ProductServiceImpl;
 import services.implementation.WaiterServiceImpl;
@@ -30,6 +31,8 @@ public class Ioc {
     instanceMap.put(IocServices.CHEF_SERVICE_INSTANCE, new ChefServiceImpl());
     instanceMap.put(IocServices.WAITER_SERVICE_INSTANCE, new WaiterServiceImpl());
     instanceMap.put(IocServices.FINAL_PRODUCT_SERVICE_INSTANCE, new FinalProductServiceImpl());
+    instanceMap.put(
+        IocServices.FINAL_PRODUCT_PRODUCT_SERVICE_INSTANCE, new FinalProductProductServiceImpl());
   }
 
   public static Ioc getInstance() {

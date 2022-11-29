@@ -26,7 +26,7 @@ public final class FinalProductServiceFixtures {
 
   public static FinalProduct buildFinalProduct(FinalProduct finalProductExample) {
     var finalProduct = new FinalProduct();
-    ProductFixtures.buildProduct(finalProduct, finalProductExample);
+    FinalProductFixtures.buildFinalProduct(finalProduct, finalProductExample);
     return finalProduct;
   }
 }
