@@ -8,4 +8,5 @@ public final class IocServices {
   public static final String WAITER_SERVICE_INSTANCE = "waiterService";
   public static final String FINAL_PRODUCT_SERVICE_INSTANCE = "finalProductService";
   public static final String FINAL_PRODUCT_PRODUCT_SERVICE_INSTANCE = "finalProductProductService";
+  public static final String TAX_SERVICE_INSTANCE = "taxService";
 }
