@@ -50,21 +50,21 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   @Override
   public Optional<E> findById(K id) {
     Optional.ofNullable(id).orElseThrow(IdNullPointerException::new);
-    var client =
+    var entity =
         this.entities.stream()
-            .filter(c -> id.equals(c.getId()) && !(c.getStatus() == StatusEnum.DELETED))
+            .filter(e -> id.equals(e.getId()) && !(e.getStatus() == StatusEnum.DELETED))
             .findAny()
             .orElseThrow(() -> new EntityNotFoundException(entityClass, id));
-    return Optional.ofNullable(client);
+    return Optional.ofNullable(entity);
   }
 
   @Override
   public Optional<E> delete(K id) {
     Optional.ofNullable(id).orElseThrow(IdNullPointerException::new);
-    var client = this.findById(id).get();
-    client.setStatus(StatusEnum.DELETED);
-    client.setUpdatedAt(Instant.now());
-    return Optional.of(client);
+    var entity = this.findById(id).get();
+    entity.setStatus(StatusEnum.DELETED);
+    entity.setUpdatedAt(Instant.now());
+    return Optional.of(entity);
   }
 
   @Override
@@ -80,7 +80,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   @Override
   public List<E> findAll() {
     return this.entities.stream()
-        .filter(c -> c.getStatus() != StatusEnum.DELETED)
+        .filter(e -> e.getStatus() != StatusEnum.DELETED)
         .collect(Collectors.toList());
   }
 }
