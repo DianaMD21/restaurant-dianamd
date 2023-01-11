@@ -8,6 +8,7 @@ import entities.FinalProduct;
 import entities.FinalProductProduct;
 import entities.Product;
 import entities.Stock;
+import entities.StockProduct;
 import entities.Tax;
 import entities.Waiter;
 import java.util.Map;
@@ -40,7 +41,9 @@ public final class BaseEntityUtil {
           Tax.class,
           (Tax target, Tax source) -> TaxUtil.fetchTax(target, source),
           Stock.class,
-          (Stock target, Stock source) -> StockUtil.fetchStock(target, source));
+          (Stock target, Stock source) -> StockUtil.fetchStock(target, source),
+              StockProduct.class,
+              (StockProduct target, StockProduct source) -> StockProductUtil.fetchStockProduct(target, source));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
