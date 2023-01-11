@@ -3,7 +3,7 @@ package util.fixtures;
 import entities.FinalProductProduct;
 import java.util.Optional;
 
-public class FinalProductProductFixtures {
+public final class FinalProductProductFixtures {
   public static FinalProductProduct buildFinalProductProduct(
       FinalProductProduct finalProductProduct, FinalProductProduct finalProductProductExample) {
     BaseEntityFixtures.buildBaseEntity(finalProductProduct, finalProductProductExample);

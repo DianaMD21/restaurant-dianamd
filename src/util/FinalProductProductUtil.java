@@ -3,7 +3,7 @@ package util;
 import entities.FinalProductProduct;
 import java.util.Optional;
 
-public class FinalProductProductUtil {
+public final class FinalProductProductUtil {
   public static FinalProductProduct fetchFinalProductProduct(
       FinalProductProduct target, FinalProductProduct source) {
     BaseEntityUtil.fetchBaseEntity(target, source);
