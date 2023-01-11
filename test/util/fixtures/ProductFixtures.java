@@ -5,6 +5,8 @@ import enums.MeasureUnitEnum;
 import java.util.Optional;
 
 public final class ProductFixtures {
+  public static final Long FAKEID = 10L;
+
   public static Product buildProduct(Product product, Product productExample) {
     BaseEntityFixtures.buildBaseEntity(product, productExample);
     product.setName(

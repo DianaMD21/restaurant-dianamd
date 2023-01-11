@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import services.implementation.TaxServiceImpl;
+import util.fixtures.TaxFixtures;
 import util.fixtures.TaxServiceFixtures;
 
 public class TaxServiceTest {
@@ -61,7 +62,7 @@ public class TaxServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var taxExample = new Tax();
-    taxExample.setId(TaxServiceFixtures.FAKEID);
+    taxExample.setId(TaxFixtures.FAKEID);
     var tax = TaxServiceFixtures.buildTax(taxExample);
     taxService.update(tax);
   }

@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import services.implementation.ClientServiceImpl;
 import util.fixtures.ClientServiceFixtures;
+import util.fixtures.UserFixtures;
 
 public class ClientServiceTest {
   private ClientServiceImpl clientService;
@@ -61,7 +62,7 @@ public class ClientServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var clientExample = new Client();
-    clientExample.setId(ClientServiceFixtures.FAKEID);
+    clientExample.setId(UserFixtures.FAKEID);
     var client = ClientServiceFixtures.buildClient(clientExample);
     clientService.update(client);
   }

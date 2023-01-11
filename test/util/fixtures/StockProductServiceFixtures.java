@@ -6,11 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public final class StockProductServiceFixtures {
-    public static List<StockProduct> buildStockProducts(Integer size) {
-        return LongStream.range(0, size)
-                .mapToObj(StockProductServiceFixtures::buildStockProduct)
-                .collect(Collectors.toList());
-    }
 
     public static StockProduct buildStockProduct() {
         return buildStockProduct((StockProduct) null);

@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import services.implementation.CashierServiceImpl;
 import util.fixtures.CashierServiceFixtures;
+import util.fixtures.UserFixtures;
 
 public class CashierServiceTest {
   private CashierServiceImpl cashierService;
@@ -61,7 +62,7 @@ public class CashierServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var cashierExample = new Cashier();
-    cashierExample.setId(CashierServiceFixtures.FAKEID);
+    cashierExample.setId(UserFixtures.FAKEID);
     var cashier = CashierServiceFixtures.buildCashier(cashierExample);
     cashierService.update(cashier);
   }
