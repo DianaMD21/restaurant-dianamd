@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import services.implementation.FinalProductServiceImpl;
+import util.fixtures.FinalProductFixtures;
 import util.fixtures.FinalProductServiceFixtures;
 
 public class FinalProductServiceTest {
@@ -61,7 +62,7 @@ public class FinalProductServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var finalProductExample = new FinalProduct();
-    finalProductExample.setId(FinalProductServiceFixtures.FAKEID);
+    finalProductExample.setId(FinalProductFixtures.FAKEID);
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct(finalProductExample);
     finalProductService.update(finalProduct);
   }

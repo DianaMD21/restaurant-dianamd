@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import services.implementation.WaiterServiceImpl;
+import util.fixtures.UserFixtures;
 import util.fixtures.WaiterServiceFixtures;
 
 public class WaiterServiceTest {
@@ -61,7 +62,7 @@ public class WaiterServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var waiterExample = new Waiter();
-    waiterExample.setId(WaiterServiceFixtures.FAKEID);
+    waiterExample.setId(UserFixtures.FAKEID);
     var waiter = WaiterServiceFixtures.buildWaiter(waiterExample);
     waiterService.update(waiter);
   }

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public final class ClientServiceFixtures {
-  public static final Long FAKEID = 10L;
 
   public static List<Client> buildClients(Integer size) {
     return LongStream.range(0, size)

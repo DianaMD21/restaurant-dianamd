@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import services.implementation.ChefServiceImpl;
 import util.fixtures.ChefServiceFixtures;
+import util.fixtures.UserFixtures;
 
 public class ChefServiceTest {
   private ChefServiceImpl chefService;
@@ -61,7 +62,7 @@ public class ChefServiceTest {
   @Test(expected = EntityNotFoundException.class)
   public void update_ShouldThrowEntityNotFoundException() {
     var chefExample = new Chef();
-    chefExample.setId(ChefServiceFixtures.FAKEID);
+    chefExample.setId(UserFixtures.FAKEID);
     var chef = ChefServiceFixtures.buildChef(chefExample);
     chefService.update(chef);
   }

@@ -4,6 +4,8 @@ import entities.FinalProduct;
 import java.util.Optional;
 
 public final class FinalProductFixtures {
+  public static final Long FAKEID = 10L;
+
   public static FinalProduct buildFinalProduct(
       FinalProduct finalProduct, FinalProduct finalProductExample) {
     ProductFixtures.buildProduct(finalProduct, finalProductExample);

@@ -6,6 +6,8 @@ import enums.StatusEnum;
 import java.util.Optional;
 
 public final class UserFixtures {
+  public static final Long FAKEID = 10L;
+
   public static User buildUser(User user, User userExample) {
     BaseEntityFixtures.buildBaseEntity(user, userExample);
     user.setName(Optional.ofNullable(userExample).map(User::getName).orElse("testing-name"));

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public final class WaiterServiceFixtures {
-  public static final Long FAKEID = 10L;
 
   public static List<Waiter> buildWaiters(Integer size) {
     return LongStream.range(0, size)
