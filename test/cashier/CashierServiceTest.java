@@ -41,7 +41,7 @@ public class CashierServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var cashier = CashierServiceFixtures.buildCashier();
     var newCashier = cashierService.insert(cashier).get();
     cashierService.delete(newCashier.getId());

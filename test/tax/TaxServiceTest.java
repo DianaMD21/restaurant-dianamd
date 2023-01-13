@@ -41,7 +41,7 @@ public class TaxServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax).get();
     taxService.delete(newTax.getId());

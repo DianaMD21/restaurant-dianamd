@@ -41,7 +41,7 @@ public class WaiterServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var waiter = WaiterServiceFixtures.buildWaiter();
     var newWaiter = waiterService.insert(waiter).get();
     waiterService.delete(newWaiter.getId());

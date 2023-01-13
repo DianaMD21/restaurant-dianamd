@@ -42,7 +42,7 @@ public class OrderDetailTaxServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
     var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax).get();
     orderDetailTaxService.delete(newOrderDetailTax.getId());
