@@ -15,6 +15,7 @@ import services.implementation.FinalProductProductServiceImpl;
 import services.implementation.FinalProductServiceImpl;
 import services.implementation.OrderDetailProductServiceImpl;
 import services.implementation.OrderDetailServiceImpl;
+import services.implementation.OrderServiceImpl;
 import services.implementation.ProductServiceImpl;
 import services.implementation.StockProductServiceImpl;
 import services.implementation.StockServiceImpl;
@@ -45,6 +46,8 @@ public class Ioc {
     instanceMap.put(IocServices.ORDER_DETAIL_SERVICE_INSTANCE, new OrderDetailServiceImpl());
     instanceMap.put(
         IocServices.ORDER_DETAIL_PRODUCT_SERVICE_INSTANCE, new OrderDetailProductServiceImpl());
+    instanceMap.put(
+            IocServices.ORDER_SERVICE_INSTANCE, new OrderServiceImpl());
   }
 
   public static Ioc getInstance() {
