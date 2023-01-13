@@ -6,11 +6,14 @@ import entities.Chef;
 import entities.Client;
 import entities.FinalProduct;
 import entities.FinalProductProduct;
+import entities.OrderDetail;
 import entities.Product;
 import entities.Stock;
 import entities.StockProduct;
 import entities.Tax;
 import entities.Waiter;
+
+import java.util.AbstractMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -21,29 +24,58 @@ public final class BaseEntityUtil {
   public static final Map<Class<?>, Function<?, ?>> ENTITY_KEY_TO_GENERATOR_FUNCTION_MAP =
       Map.of(Long.class, (Long currentId) -> currentId + 1);
   public static final Map<Class<?>, BiFunction<?, ?, ?>> ENTITY_TO_FETCH_FUNCTION_MAP =
-      Map.of(
-          Client.class,
-          (Client target, Client source) -> ClientUtil.fetchClient(target, source),
-          Cashier.class,
-          (Cashier target, Cashier source) -> CashierUtil.fetchCashier(target, source),
-          Product.class,
-          (Product target, Product source) -> ProductUtil.fetchProduct(target, source),
-          Chef.class,
-          (Chef target, Chef source) -> ChefUtil.fetchChef(target, source),
-          Waiter.class,
-          (Waiter target, Waiter source) -> WaiterUtil.fetchWaiter(target, source),
-          FinalProduct.class,
-          (FinalProduct target, FinalProduct source) ->
-              FinalProductUtil.fetchFinalProduct(target, source),
-          FinalProductProduct.class,
-          (FinalProductProduct target, FinalProductProduct source) ->
-              FinalProductProductUtil.fetchFinalProductProduct(target, source),
-          Tax.class,
-          (Tax target, Tax source) -> TaxUtil.fetchTax(target, source),
-          Stock.class,
-          (Stock target, Stock source) -> StockUtil.fetchStock(target, source),
-              StockProduct.class,
-              (StockProduct target, StockProduct source) -> StockProductUtil.fetchStockProduct(target, source));
+      MapUtil.of(
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Client.class, (Client target,
+                                     Client source) -> ClientUtil.fetchClient(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Cashier.class,
+                      (Cashier target, Cashier source) -> CashierUtil.fetchCashier(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Product.class,
+                      (Product target, Product source) -> ProductUtil.fetchProduct(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Chef.class,
+                      (Chef target, Chef source) -> ChefUtil.fetchChef(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Waiter.class,
+                      (Waiter target, Waiter source) -> WaiterUtil.fetchWaiter(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      FinalProduct.class,
+                      (FinalProduct target, FinalProduct source) ->
+                              FinalProductUtil.fetchFinalProduct(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      FinalProductProduct.class,
+                      (FinalProductProduct target, FinalProductProduct source) ->
+                              FinalProductProductUtil.fetchFinalProductProduct(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      OrderDetail.class,
+                      (OrderDetail target, OrderDetail source) ->
+                              OrderDetailUtil.fetchOrderDetail(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Tax.class,
+                      (Tax target, Tax source) -> TaxUtil.fetchTax(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      Stock.class,
+                      (Stock target, Stock source) -> StockUtil.fetchStock(target, source)
+              ),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      StockProduct.class,
+                      (StockProduct target, StockProduct source) ->
+                              StockProductUtil.fetchStockProduct(target, source)),
+              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+                      OrderDetail.class,
+                      (OrderDetail target, OrderDetail source) ->
+                              OrderDetailUtil.fetchOrderDetail(target, source)));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
