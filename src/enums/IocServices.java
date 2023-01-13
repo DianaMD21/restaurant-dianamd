@@ -15,4 +15,5 @@ public final class IocServices {
   public static final String ORDER_DETAIL_PRODUCT_SERVICE_INSTANCE = "orderDetailProductService";
   public static final String ORDER_SERVICE_INSTANCE = "orderService";
   public static final String ORDER_DETAIL_TAX_SERVICE_INSTANCE = "orderDetailTaxService";
+  public static final String ORDER_TAX_SERVICE_INSTANCE = "orderTaxService";
 }
