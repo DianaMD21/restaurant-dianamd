@@ -1,6 +1,5 @@
 package util;
 
-import entities.Cashier;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
