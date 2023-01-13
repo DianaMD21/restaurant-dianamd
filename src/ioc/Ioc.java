@@ -17,6 +17,7 @@ import services.implementation.OrderDetailProductServiceImpl;
 import services.implementation.OrderDetailServiceImpl;
 import services.implementation.OrderDetailTaxServiceImpl;
 import services.implementation.OrderServiceImpl;
+import services.implementation.OrderTaxServiceImpl;
 import services.implementation.ProductServiceImpl;
 import services.implementation.StockProductServiceImpl;
 import services.implementation.StockServiceImpl;
@@ -49,6 +50,7 @@ public class Ioc {
         IocServices.ORDER_DETAIL_PRODUCT_SERVICE_INSTANCE, new OrderDetailProductServiceImpl());
     instanceMap.put(IocServices.ORDER_SERVICE_INSTANCE, new OrderServiceImpl());
     instanceMap.put(IocServices.ORDER_DETAIL_TAX_SERVICE_INSTANCE, new OrderDetailTaxServiceImpl());
+    instanceMap.put(IocServices.ORDER_TAX_SERVICE_INSTANCE, new OrderTaxServiceImpl());
   }
 
   public static Ioc getInstance() {

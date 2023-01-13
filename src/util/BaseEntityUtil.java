@@ -10,6 +10,7 @@ import entities.Order;
 import entities.OrderDetail;
 import entities.OrderDetailProduct;
 import entities.OrderDetailTax;
+import entities.OrderTax;
 import entities.Product;
 import entities.Stock;
 import entities.StockProduct;
@@ -74,7 +75,10 @@ public final class BaseEntityUtil {
           new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
               OrderDetailTax.class,
               (OrderDetailTax target, OrderDetailTax source) ->
-                  OrderDetailTaxUtil.fetchOrderDetailTax(target, source)));
+                  OrderDetailTaxUtil.fetchOrderDetailTax(target, source)),
+          new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+              OrderTax.class,
+              (OrderTax target, OrderTax source) -> OrderTaxUtil.fetchOrderTax(target, source)));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
