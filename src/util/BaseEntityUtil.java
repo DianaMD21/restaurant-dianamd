@@ -9,6 +9,7 @@ import entities.FinalProductProduct;
 import entities.Order;
 import entities.OrderDetail;
 import entities.OrderDetailProduct;
+import entities.OrderDetailTax;
 import entities.Product;
 import entities.Stock;
 import entities.StockProduct;
@@ -68,10 +69,12 @@ public final class BaseEntityUtil {
               OrderDetailProduct.class,
               (OrderDetailProduct target, OrderDetailProduct source) ->
                   OrderDetailProductUtil.fetchOrderDetailProduct(target, source)),
-              new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
-                      Order.class,
-                      (Order target, Order source) ->
-                              OrderUtil.fetchOrder(target, source)));
+          new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+              Order.class, (Order target, Order source) -> OrderUtil.fetchOrder(target, source)),
+          new AbstractMap.SimpleEntry<Class<?>, BiFunction<?, ?, ?>>(
+              OrderDetailTax.class,
+              (OrderDetailTax target, OrderDetailTax source) ->
+                  OrderDetailTaxUtil.fetchOrderDetailTax(target, source)));
 
   public static BaseEntity fetchBaseEntity(BaseEntity target, BaseEntity source) {
     target.setUpdatedAt(
