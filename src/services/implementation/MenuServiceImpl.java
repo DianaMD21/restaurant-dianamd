@@ -4,7 +4,7 @@ import entities.Menu;
 import services.interfaces.MenuService;
 
 public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements MenuService {
-    public MenuServiceImpl() {
-        super(0L, Menu.class, Long.class);
-    }
+  public MenuServiceImpl() {
+    super(0L, Menu.class, Long.class);
+  }
 }

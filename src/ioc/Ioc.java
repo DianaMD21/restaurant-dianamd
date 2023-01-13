@@ -1,5 +1,7 @@
 package ioc;
 
+import controllers.ClientController;
+import enums.IocControllers;
 import enums.IocServices;
 import exceptions.ioc.IocDuplicatedKeyException;
 import exceptions.ioc.IocKeyNotFoundException;
@@ -31,6 +33,13 @@ public class Ioc {
 
   private Ioc() {
     this.registerServices(this.instanceMap);
+    this.registerControllers(this.instanceMap);
+  }
+
+  private void registerControllers(Map<String, Object> instanceMap) {
+    instanceMap.put(
+        IocControllers.CLIENT_CONTROLLER,
+        new ClientController(this.get(IocServices.CLIENT_SERVICE_INSTANCE)));
   }
 
   private void registerServices(Map<String, Object> instanceMap) {
