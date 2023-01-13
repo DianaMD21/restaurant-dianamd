@@ -43,7 +43,7 @@ public class OrderDetailProductServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct).get();
     orderDetailProductService.delete(newOrderDetailProduct.getId());

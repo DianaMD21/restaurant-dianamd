@@ -41,7 +41,7 @@ public class ChefServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef).get();
     chefService.delete(newChef.getId());

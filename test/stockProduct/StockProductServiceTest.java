@@ -41,7 +41,7 @@ public class StockProductServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
     var newStockProduct = stockProductService.insert(stockProduct).get();
     stockProductService.delete(newStockProduct.getId());

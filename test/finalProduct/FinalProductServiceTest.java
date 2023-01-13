@@ -41,7 +41,7 @@ public class FinalProductServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct).get();
     finalProductService.delete(newFinalProduct.getId());

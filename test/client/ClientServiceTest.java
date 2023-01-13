@@ -41,7 +41,7 @@ public class ClientServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var client = ClientServiceFixtures.buildClient();
     var newClient = clientService.insert(client).get();
     clientService.delete(newClient.getId());

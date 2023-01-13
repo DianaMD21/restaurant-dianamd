@@ -41,7 +41,7 @@ public class OrderTaxServiceTest {
   }
 
   @Test(expected = EntityNotFoundException.class)
-  public void findById_ShouldThrowEntityNotFoundException_IfStatusIsDeleted() {
+  public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
     var newOrderTax = orderTaxService.insert(orderTax).get();
     orderTaxService.delete(newOrderTax.getId());
