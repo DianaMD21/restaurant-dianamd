@@ -3,7 +3,7 @@ package util;
 import entities.Product;
 import java.util.Optional;
 
-public class ProductUtil {
+public final class ProductUtil {
   public static Product fetchProduct(Product target, Product source) {
     BaseEntityUtil.fetchBaseEntity(target, source);
     target.setName(Optional.ofNullable(source).map(Product::getName).orElse(target.getName()));
