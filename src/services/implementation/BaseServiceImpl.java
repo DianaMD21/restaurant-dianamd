@@ -37,14 +37,14 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   }
 
   @Override
-  public Optional<E> insert(E entity) {
+  public E insert(E entity) {
     entity.setId(this.currentId);
     entity.setStatus(StatusEnum.ACTIVE);
     entity.setCreatedAt(Instant.now());
     entity.setUpdatedAt(Instant.now());
     this.currentId = this.generateNextId.apply(this.currentId);
     this.entities.add(entity);
-    return Optional.of(entity);
+    return entity;
   }
 
   @Override
@@ -59,22 +59,22 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   }
 
   @Override
-  public Optional<E> delete(K id) {
+  public E delete(K id) {
     Optional.ofNullable(id).orElseThrow(IdNullPointerException::new);
     var entity = this.findById(id).get();
     entity.setStatus(StatusEnum.DELETED);
     entity.setUpdatedAt(Instant.now());
-    return Optional.of(entity);
+    return entity;
   }
 
   @Override
-  public Optional<E> update(E entity) {
+  public E update(E entity) {
     Optional.ofNullable(entity).orElseThrow(NullEntityException::new);
     Optional.ofNullable(entity.getId()).orElseThrow(IdNullPointerException::new);
     var existingEntity = this.findById(entity.getId()).get();
     entity.setUpdatedAt(Instant.now());
     var updatedEntity = fetchEntity.apply(existingEntity, entity);
-    return Optional.of(updatedEntity);
+    return updatedEntity;
   }
 
   @Override

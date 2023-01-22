@@ -1,19 +1,18 @@
 package cashier;
 
-import static org.junit.Assert.assertEquals;
-
 import entities.Cashier;
 import enums.IocServices;
 import exceptions.services.EntityNotFoundException;
 import exceptions.services.IdNullPointerException;
 import exceptions.services.NullEntityException;
 import ioc.Ioc;
-import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import services.implementation.CashierServiceImpl;
 import util.fixtures.CashierServiceFixtures;
 import util.fixtures.UserFixtures;
+
+import static org.junit.Assert.assertEquals;
 
 public class CashierServiceTest {
   private CashierServiceImpl cashierService;
@@ -37,13 +36,13 @@ public class CashierServiceTest {
   public void findById_ShouldReturnOptionalOfCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
     var newCashier = cashierService.insert(cashier);
-    assertEquals(newCashier, cashierService.findById(cashier.getId()));
+    assertEquals(newCashier, cashierService.findById(cashier.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierService.insert(cashier).get();
+    var newCashier = cashierService.insert(cashier);
     cashierService.delete(newCashier.getId());
     cashierService.findById(newCashier.getId());
   }
@@ -80,9 +79,9 @@ public class CashierServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfCashier() {
+  public void insert_ShouldReturnCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    assertEquals(Optional.of(cashier), cashierService.insert(cashier));
+    assertEquals(cashier, cashierService.insert(cashier));
   }
 
   @Test(expected = IdNullPointerException.class)

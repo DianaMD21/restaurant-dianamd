@@ -39,13 +39,13 @@ public class FinalProductProductTest {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
     var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
     assertEquals(
-        newFinalProductProduct, finalProductProductService.findById(finalProductProduct.getId()));
+        newFinalProductProduct, finalProductProductService.findById(finalProductProduct.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
-    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct).get();
+    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
     finalProductProductService.delete(newFinalProductProduct.getId());
     finalProductProductService.findById(newFinalProductProduct.getId());
   }
@@ -85,10 +85,10 @@ public class FinalProductProductTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfFinalProductProduct() {
+  public void insert_ShouldReturnFinalProductProduct() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
     assertEquals(
-        Optional.of(finalProductProduct), finalProductProductService.insert(finalProductProduct));
+        finalProductProduct, finalProductProductService.insert(finalProductProduct));
   }
 
   @Test(expected = IdNullPointerException.class)

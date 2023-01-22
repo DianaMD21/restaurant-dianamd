@@ -37,13 +37,13 @@ public class ChefServiceTest {
   public void findById_ShouldReturnOptionalOfChef() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef);
-    assertEquals(newChef, chefService.findById(chef.getId()));
+    assertEquals(newChef, chefService.findById(chef.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefService.insert(chef).get();
+    var newChef = chefService.insert(chef);
     chefService.delete(newChef.getId());
     chefService.findById(newChef.getId());
   }
@@ -80,9 +80,9 @@ public class ChefServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfChef() {
+  public void insert_ShouldReturnChef() {
     var chef = ChefServiceFixtures.buildChef();
-    assertEquals(Optional.of(chef), chefService.insert(chef));
+    assertEquals(chef, chefService.insert(chef));
   }
 
   @Test(expected = IdNullPointerException.class)

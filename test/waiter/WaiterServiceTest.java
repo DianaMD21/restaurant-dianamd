@@ -37,13 +37,13 @@ public class WaiterServiceTest {
   public void findById_ShouldReturnOptionalOfWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
     var newWaiter = waiterService.insert(waiter);
-    assertEquals(newWaiter, waiterService.findById(waiter.getId()));
+    assertEquals(newWaiter, waiterService.findById(waiter.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    var newWaiter = waiterService.insert(waiter).get();
+    var newWaiter = waiterService.insert(waiter);
     waiterService.delete(newWaiter.getId());
     waiterService.findById(newWaiter.getId());
   }
@@ -80,9 +80,9 @@ public class WaiterServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfWaiter() {
+  public void insert_ShouldReturnWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    assertEquals(Optional.of(waiter), waiterService.insert(waiter));
+    assertEquals(waiter, waiterService.insert(waiter));
   }
 
   @Test(expected = IdNullPointerException.class)

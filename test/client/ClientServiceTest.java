@@ -37,13 +37,13 @@ public class ClientServiceTest {
   public void findById_ShouldReturnOptionalOfClient() {
     var client = ClientServiceFixtures.buildClient();
     var newClient = clientService.insert(client);
-    assertEquals(newClient, clientService.findById(client.getId()));
+    assertEquals(newClient, clientService.findById(client.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var client = ClientServiceFixtures.buildClient();
-    var newClient = clientService.insert(client).get();
+    var newClient = clientService.insert(client);
     clientService.delete(newClient.getId());
     clientService.findById(newClient.getId());
   }
@@ -80,9 +80,9 @@ public class ClientServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfClient() {
+  public void insert_ShouldReturnClient() {
     var client = ClientServiceFixtures.buildClient();
-    assertEquals(Optional.of(client), clientService.insert(client));
+    assertEquals(client, clientService.insert(client));
   }
 
   @Test(expected = IdNullPointerException.class)

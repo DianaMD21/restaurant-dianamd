@@ -38,13 +38,13 @@ public class OrderDetailTaxServiceTest {
   public void findById_ShouldReturnOptionalOfOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
     var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
-    assertEquals(newOrderDetailTax, orderDetailTaxService.findById(orderDetailTax.getId()));
+    assertEquals(newOrderDetailTax, orderDetailTaxService.findById(orderDetailTax.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax).get();
+    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
     orderDetailTaxService.delete(newOrderDetailTax.getId());
     orderDetailTaxService.findById(newOrderDetailTax.getId());
   }
@@ -82,9 +82,9 @@ public class OrderDetailTaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfOrderDetailTax() {
+  public void insert_ShouldReturnOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    assertEquals(Optional.of(orderDetailTax), orderDetailTaxService.insert(orderDetailTax));
+    assertEquals(orderDetailTax, orderDetailTaxService.insert(orderDetailTax));
   }
 
   @Test(expected = IdNullPointerException.class)

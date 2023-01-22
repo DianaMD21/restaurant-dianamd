@@ -39,13 +39,13 @@ public class OrderDetailProductServiceTest {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct);
     assertEquals(
-        newOrderDetailProduct, orderDetailProductService.findById(orderDetailProduct.getId()));
+        newOrderDetailProduct, orderDetailProductService.findById(orderDetailProduct.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
-    var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct).get();
+    var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct);
     orderDetailProductService.delete(newOrderDetailProduct.getId());
     orderDetailProductService.findById(newOrderDetailProduct.getId());
   }
@@ -84,10 +84,10 @@ public class OrderDetailProductServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfOrderDetailProduct() {
+  public void insert_ShouldReturnOrderDetailProduct() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     assertEquals(
-        Optional.of(orderDetailProduct), orderDetailProductService.insert(orderDetailProduct));
+        orderDetailProduct, orderDetailProductService.insert(orderDetailProduct));
   }
 
   @Test(expected = IdNullPointerException.class)

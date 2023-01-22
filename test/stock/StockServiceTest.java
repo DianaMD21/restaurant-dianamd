@@ -37,13 +37,13 @@ public class StockServiceTest {
   public void findById_ShouldReturnOptionalOfStock() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
-    assertEquals(newStock, stockService.findById(stock.getId()));
+    assertEquals(newStock, stockService.findById(stock.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var stock = StockServiceFixtures.buildStock();
-    var newStock = stockService.insert(stock).get();
+    var newStock = stockService.insert(stock);
     stockService.delete(newStock.getId());
     stockService.findById(newStock.getId());
   }
@@ -79,9 +79,9 @@ public class StockServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfStock() {
+  public void insert_ShouldReturnStock() {
     var stock = StockServiceFixtures.buildStock();
-    assertEquals(Optional.of(stock), stockService.insert(stock));
+    assertEquals(stock, stockService.insert(stock));
   }
 
   @Test(expected = IdNullPointerException.class)
