@@ -37,13 +37,13 @@ public class ProductServiceTest {
   public void findById_ShouldReturnOptionalOfProduct() {
     var product = ProductServiceFixtures.buildProduct();
     var newProduct = productService.insert(product);
-    assertEquals(newProduct, productService.findById(product.getId()));
+    assertEquals(newProduct, productService.findById(product.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var product = ProductServiceFixtures.buildProduct();
-    var newProduct = productService.insert(product).get();
+    var newProduct = productService.insert(product);
     productService.delete(newProduct.getId());
     productService.findById(newProduct.getId());
   }
@@ -80,9 +80,9 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfProduct() {
+  public void insert_ShouldReturnProduct() {
     var product = ProductServiceFixtures.buildProduct();
-    assertEquals(Optional.of(product), productService.insert(product));
+    assertEquals(product, productService.insert(product));
   }
 
   @Test(expected = IdNullPointerException.class)

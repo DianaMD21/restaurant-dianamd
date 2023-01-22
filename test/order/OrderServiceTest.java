@@ -38,13 +38,13 @@ public class OrderServiceTest {
   public void findById_ShouldReturnOptionalOfOrder() {
     var order = OrderServiceFixtures.buildOrder();
     var newOrder = orderService.insert(order);
-    assertEquals(newOrder, orderService.findById(order.getId()));
+    assertEquals(newOrder, orderService.findById(order.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var order = OrderServiceFixtures.buildOrder();
-    var newOrder = orderService.insert(order).get();
+    var newOrder = orderService.insert(order);
     orderService.delete(newOrder.getId());
     orderService.findById(newOrder.getId());
   }
@@ -81,9 +81,9 @@ public class OrderServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfOrder() {
+  public void insert_ShouldReturnOrder() {
     var order = OrderServiceFixtures.buildOrder();
-    assertEquals(Optional.of(order), orderService.insert(order));
+    assertEquals(order, orderService.insert(order));
   }
 
   @Test(expected = IdNullPointerException.class)

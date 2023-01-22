@@ -38,13 +38,13 @@ public class MenuServiceTest {
     public void findById_ShouldReturnOptionalOfMenu() {
         var menu = MenuServiceFixtures.buildMenu();
         var newMenu = menuService.insert(menu);
-        assertEquals(newMenu, menuService.findById(menu.getId()));
+        assertEquals(newMenu, menuService.findById(menu.getId()).get());
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
         var menu = MenuServiceFixtures.buildMenu();
-        var newMenu = menuService.insert(menu).get();
+        var newMenu = menuService.insert(menu);
         menuService.delete(newMenu.getId());
         menuService.findById(newMenu.getId());
     }
@@ -82,7 +82,7 @@ public class MenuServiceTest {
     @Test
     public void insert_ShouldReturnOptionalOfMenu() {
         var menu = MenuServiceFixtures.buildMenu();
-        assertEquals(Optional.of(menu), menuService.insert(menu));
+        assertEquals(menu, menuService.insert(menu));
     }
 
     @Test(expected = IdNullPointerException.class)

@@ -37,13 +37,13 @@ public class OrderTaxServiceTest {
   public void findById_ShouldReturnOptionalOfOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
     var newOrderTax = orderTaxService.insert(orderTax);
-    assertEquals(newOrderTax, orderTaxService.findById(orderTax.getId()));
+    assertEquals(newOrderTax, orderTaxService.findById(orderTax.getId()).get());
   }
 
   @Test(expected = EntityNotFoundException.class)
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    var newOrderTax = orderTaxService.insert(orderTax).get();
+    var newOrderTax = orderTaxService.insert(orderTax);
     orderTaxService.delete(newOrderTax.getId());
     orderTaxService.findById(newOrderTax.getId());
   }
@@ -79,9 +79,9 @@ public class OrderTaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfOrderTax() {
+  public void insert_ShouldReturnOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    assertEquals(Optional.of(orderTax), orderTaxService.insert(orderTax));
+    assertEquals(orderTax, orderTaxService.insert(orderTax));
   }
 
   @Test(expected = IdNullPointerException.class)
