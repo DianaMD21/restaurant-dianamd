@@ -1,0 +1,70 @@
+package com.diana.restaurant.controllers.chef;
+
+import com.diana.restaurant.controllers.ChefController;
+import com.diana.restaurant.services.implementation.ChefServiceImpl;
+import com.diana.restaurant.services.interfaces.ChefService;
+import com.diana.restaurant.util.fixtures.ChefServiceFixtures;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.Mockito;
+
+public class ChefControllerIntegrationTest {
+  private ChefController chefController;
+  private ChefService chefServiceSpy;
+
+  @Before
+  public void setUp() {
+    ChefService chefService = new ChefServiceImpl();
+    chefServiceSpy = Mockito.spy(chefService);
+    chefController = new ChefController(chefServiceSpy);
+  }
+
+  @Test
+  public void findById_ShouldReturnFoundChef() {
+    var chef = ChefServiceFixtures.buildChef();
+    chefController.add(chef);
+    var chefFound = chefController.findById(chef.getId());
+    Assertions.assertEquals(chefFound, chef);
+    Mockito.verify(chefServiceSpy, Mockito.times(1)).findById(Mockito.eq(chef.getId()));
+  }
+
+  @Test
+  public void findAll_ShouldReturnAllChefs() {
+    var chefs = ChefServiceFixtures.buildChefs(3);
+    chefs.stream().forEach(chefController::add);
+    var chefsFound = chefController.getAll();
+    Assertions.assertEquals(chefs, chefsFound);
+  }
+
+  @Test
+  public void add_ShouldInsertAChef() {
+    var chef = ChefServiceFixtures.buildChef();
+    var chefInserted = chefController.add(chef);
+    Assertions.assertEquals(chefInserted, chef);
+    Mockito.verify(chefServiceSpy, Mockito.times(1)).insert(Mockito.eq(chef));
+  }
+
+  @Test
+  public void delete_ShouldDeleteAChef() {
+    var chefs = ChefServiceFixtures.buildChefs(3);
+    chefs.stream().forEach(chefController::add);
+    var deletedChef = chefController.deleteById(chefs.get(0).getId());
+    var deletedChefToVerify = ChefServiceFixtures.buildChef(chefs.get(0));
+    Assertions.assertEquals(deletedChef, chefs.get(0));
+    Mockito.verify(chefServiceSpy, Mockito.times(1))
+        .delete(Mockito.eq(deletedChefToVerify.getId()));
+  }
+
+  @Test
+  public void update_ShouldUpdateAChef() {
+    var chefToUpdate = ChefServiceFixtures.buildChef();
+    chefController.add(chefToUpdate);
+    chefToUpdate.setName("DIANA MARIA");
+    chefToUpdate.setLastName("Monegro Diaz");
+    var chefToTestVerify = ChefServiceFixtures.buildChef(chefToUpdate);
+    var updatedChef = chefController.update(chefToUpdate);
+    Assertions.assertEquals(updatedChef, chefToUpdate);
+    Mockito.verify(chefServiceSpy, Mockito.times(1)).update(Mockito.eq(chefToTestVerify));
+  }
+}

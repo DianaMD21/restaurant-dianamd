@@ -1,5 +1,6 @@
 package com.diana.restaurant.ioc;
 
+import com.diana.restaurant.controllers.ChefController;
 import com.diana.restaurant.controllers.ClientController;
 import com.diana.restaurant.enums.IocControllers;
 import com.diana.restaurant.enums.IocServices;
@@ -40,6 +41,9 @@ public class Ioc {
     instanceMap.put(
         IocControllers.CLIENT_CONTROLLER,
         new ClientController(this.get(IocServices.CLIENT_SERVICE_INSTANCE)));
+    instanceMap.put(
+        IocControllers.CHEF_CONTROLLER,
+        new ChefController(this.get(IocServices.CHEF_SERVICE_INSTANCE)));
   }
 
   private void registerServices(Map<String, Object> instanceMap) {
