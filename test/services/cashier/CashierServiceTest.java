@@ -1,4 +1,4 @@
-package cashier;
+package services.cashier;
 
 import entities.Cashier;
 import enums.IocServices;

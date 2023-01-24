@@ -1,4 +1,4 @@
-package finalProductProduct;
+package services.finalProductProduct;
 
 import static org.junit.Assert.assertEquals;
 

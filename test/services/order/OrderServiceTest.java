@@ -1,4 +1,4 @@
-package order;
+package services.order;
 
 import static org.junit.Assert.assertEquals;
 

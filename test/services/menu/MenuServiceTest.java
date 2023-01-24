@@ -1,4 +1,4 @@
-package menu;
+package services.menu;
 
 import entities.Menu;
 import enums.IocServices;

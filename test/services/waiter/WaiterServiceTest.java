@@ -1,4 +1,4 @@
-package waiter;
+package services.waiter;
 
 import static org.junit.Assert.assertEquals;
 

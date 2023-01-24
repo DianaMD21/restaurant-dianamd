@@ -1,4 +1,4 @@
-package tax;
+package services.tax;
 
 import static org.junit.Assert.assertEquals;
 

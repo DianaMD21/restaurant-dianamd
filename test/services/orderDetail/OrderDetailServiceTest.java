@@ -1,4 +1,4 @@
-package orderDetail;
+package services.orderDetail;
 
 import static org.junit.Assert.assertEquals;
 

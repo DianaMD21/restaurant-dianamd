@@ -1,4 +1,4 @@
-package orderDetailTax;
+package services.orderDetailTax;
 
 import static org.junit.Assert.assertEquals;
 

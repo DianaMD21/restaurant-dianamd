@@ -1,4 +1,4 @@
-package orderTax;
+package services.orderTax;
 
 import static org.junit.Assert.assertEquals;
 

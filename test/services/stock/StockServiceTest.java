@@ -1,4 +1,4 @@
-package stock;
+package services.stock;
 
 import static org.junit.Assert.assertEquals;
 
