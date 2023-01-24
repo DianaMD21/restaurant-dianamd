@@ -67,7 +67,7 @@ public class TaxServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedTax() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax);
     var updatedTaxExample = new Tax();
@@ -79,7 +79,7 @@ public class TaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnTax() {
+  public void insert_ShouldInsertTax() {
     var tax = TaxServiceFixtures.buildTax();
     assertEquals(tax, taxService.insert(tax));
   }
@@ -91,7 +91,7 @@ public class TaxServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteTax() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax);
     assertEquals(newTax, taxService.delete(tax.getId()));

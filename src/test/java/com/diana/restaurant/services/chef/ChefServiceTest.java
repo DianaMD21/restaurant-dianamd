@@ -79,7 +79,7 @@ public class ChefServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnChef() {
+  public void insert_ShouldInsertChef() {
     var chef = ChefServiceFixtures.buildChef();
     assertEquals(chef, chefService.insert(chef));
   }
@@ -91,7 +91,7 @@ public class ChefServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteEntity() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef);
     assertEquals(newChef, chefService.delete(chef.getId()));

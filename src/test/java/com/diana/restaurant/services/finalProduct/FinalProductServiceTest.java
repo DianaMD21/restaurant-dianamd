@@ -67,7 +67,7 @@ public class FinalProductServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct);
     var updatedFinalProductExample = new FinalProduct();
@@ -80,7 +80,7 @@ public class FinalProductServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnFinalProduct() {
+  public void delete_ShouldInsertFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     assertEquals(finalProduct, finalProductService.insert(finalProduct));
   }
@@ -92,7 +92,7 @@ public class FinalProductServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct);
     assertEquals(newFinalProduct, finalProductService.delete(finalProduct.getId()));

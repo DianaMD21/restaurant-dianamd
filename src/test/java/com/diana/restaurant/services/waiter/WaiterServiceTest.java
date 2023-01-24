@@ -67,7 +67,7 @@ public class WaiterServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
     var newWaiter = waiterService.insert(waiter);
     var updatedWaiterExample = new Waiter();
@@ -79,7 +79,7 @@ public class WaiterServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnWaiter() {
+  public void insert_ShouldInsertWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
     assertEquals(waiter, waiterService.insert(waiter));
   }
@@ -91,7 +91,7 @@ public class WaiterServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
     var newWaiter = waiterService.insert(waiter);
     assertEquals(newWaiter, waiterService.delete(waiter.getId()));
