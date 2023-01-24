@@ -67,7 +67,7 @@ public class OrderTaxServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
     var newOrderTax = orderTaxService.insert(orderTax);
     var updatedOrderTaxExample = new OrderTax();
@@ -78,7 +78,7 @@ public class OrderTaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOrderTax() {
+  public void insert_ShouldInsertOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
     assertEquals(orderTax, orderTaxService.insert(orderTax));
   }
@@ -90,7 +90,7 @@ public class OrderTaxServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
     var newOrderTax = orderTaxService.insert(orderTax);
     assertEquals(newOrderTax, orderTaxService.delete(orderTax.getId()));

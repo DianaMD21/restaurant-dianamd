@@ -67,7 +67,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedProduct() {
     var product = ProductServiceFixtures.buildProduct();
     var newProduct = productService.insert(product);
     var updatedProductExample = new Product();
@@ -79,7 +79,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnProduct() {
+  public void insert_ShouldInsertProduct() {
     var product = ProductServiceFixtures.buildProduct();
     assertEquals(product, productService.insert(product));
   }
@@ -91,7 +91,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteProduct() {
     var product = ProductServiceFixtures.buildProduct();
     var newProduct = productService.insert(product);
     assertEquals(newProduct, productService.delete(product.getId()));

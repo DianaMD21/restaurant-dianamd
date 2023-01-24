@@ -67,7 +67,7 @@ public class CashierServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
     var newCashier = cashierService.insert(cashier);
     var updatedCashierExample = new Cashier();
@@ -79,7 +79,7 @@ public class CashierServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnCashier() {
+  public void insert_ShouldInsertCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
     assertEquals(cashier, cashierService.insert(cashier));
   }
@@ -91,7 +91,7 @@ public class CashierServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
     var newCashier = cashierService.insert(cashier);
     assertEquals(newCashier, cashierService.delete(cashier.getId()));

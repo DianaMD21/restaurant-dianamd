@@ -68,7 +68,7 @@ public class OrderServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedOrder() {
     var order = OrderServiceFixtures.buildOrder();
     var newOrder = orderService.insert(order);
     var updatedOrderExample = new Order();
@@ -80,7 +80,7 @@ public class OrderServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOrder() {
+  public void insert_ShouldInsertOrder() {
     var order = OrderServiceFixtures.buildOrder();
     assertEquals(order, orderService.insert(order));
   }
@@ -92,7 +92,7 @@ public class OrderServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteOrder() {
     var order = OrderServiceFixtures.buildOrder();
     var newOrder = orderService.insert(order);
     assertEquals(newOrder, orderService.delete(order.getId()));

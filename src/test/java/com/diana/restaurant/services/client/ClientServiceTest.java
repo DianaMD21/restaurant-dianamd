@@ -49,7 +49,7 @@ public class ClientServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedClient() {
     var client = ClientServiceFixtures.buildClient();
     var newClient = clientService.insert(client);
     var updatedClientExample = new Client();
@@ -86,7 +86,7 @@ public class ClientServiceTest {
   }
 
   @Test
-  public void delete_ShouldDeleteClient() {
+  public void delete_ShouldDeletelient() {
     var client = ClientServiceFixtures.buildClient();
     var newClient = clientService.insert(client);
     assertEquals(newClient, clientService.delete(client.getId()));

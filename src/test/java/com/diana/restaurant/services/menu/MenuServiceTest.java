@@ -67,7 +67,7 @@ public class MenuServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedMenu() {
     var menu = MenuServiceFixtures.buildMenu();
     var newMenu = menuService.insert(menu);
     var updatedMenuExample = new Menu();
@@ -78,7 +78,7 @@ public class MenuServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnOptionalOfMenu() {
+  public void insert_ShouldInsertMenu() {
     var menu = MenuServiceFixtures.buildMenu();
     assertEquals(menu, menuService.insert(menu));
   }
@@ -90,7 +90,7 @@ public class MenuServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteMenu() {
     var menu = MenuServiceFixtures.buildMenu();
     var newMenu = menuService.insert(menu);
     assertEquals(newMenu, menuService.delete(menu.getId()));

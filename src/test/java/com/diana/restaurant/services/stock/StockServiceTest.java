@@ -67,7 +67,7 @@ public class StockServiceTest {
   }
 
   @Test
-  public void update_ShouldReturnUpdatedObject() {
+  public void update_ShouldReturnUpdatedStock() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
     var updatedStockExample = new Stock();
@@ -78,7 +78,7 @@ public class StockServiceTest {
   }
 
   @Test
-  public void insert_ShouldReturnStock() {
+  public void insert_ShouldInsertStock() {
     var stock = StockServiceFixtures.buildStock();
     assertEquals(stock, stockService.insert(stock));
   }
@@ -90,7 +90,7 @@ public class StockServiceTest {
   }
 
   @Test
-  public void delete_ShouldReturnDeletedValue() {
+  public void delete_ShouldDeleteStock() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
     assertEquals(newStock, stockService.delete(stock.getId()));
