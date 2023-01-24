@@ -1,6 +1,6 @@
-package util.fixtures;
+package com.diana.restaurant.util.fixtures;
 
-import java.com.restaurant.entities.Menu;
+import com.diana.restaurant.entities.Menu;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;

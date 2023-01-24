@@ -1,13 +1,13 @@
-package controllers.client;
+package com.diana.restaurant.controllers.client;
 
-import java.com.restaurant.controllers.ClientController;
+import com.diana.restaurant.controllers.ClientController;
+import com.diana.restaurant.services.implementation.ClientServiceImpl;
+import com.diana.restaurant.services.interfaces.ClientService;
+import com.diana.restaurant.util.fixtures.ClientServiceFixtures;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
-import java.com.restaurant.services.implementation.ClientServiceImpl;
-import java.com.restaurant.services.interfaces.ClientService;
-import util.fixtures.ClientServiceFixtures;
 
 public class ClientControllerIntegrationTest {
   private ClientController clientController;
@@ -50,9 +50,10 @@ public class ClientControllerIntegrationTest {
     var clients = ClientServiceFixtures.buildClients(3);
     clients.stream().forEach(clientController::add);
     var deletedClient = clientController.deleteById(clients.get(0).getId());
-    var deletedClientToVerify=ClientServiceFixtures.buildClient(clients.get(0));
+    var deletedClientToVerify = ClientServiceFixtures.buildClient(clients.get(0));
     Assertions.assertEquals(deletedClient, clients.get(0));
-    Mockito.verify(clientServiceSpy, Mockito.times(1)).delete(Mockito.eq(deletedClientToVerify.getId()));
+    Mockito.verify(clientServiceSpy, Mockito.times(1))
+        .delete(Mockito.eq(deletedClientToVerify.getId()));
   }
 
   @Test
@@ -61,7 +62,7 @@ public class ClientControllerIntegrationTest {
     clientController.add(clientToUpdate);
     clientToUpdate.setName("DIANA MARIA");
     clientToUpdate.setLastName("Monegro Diaz");
-    var clientToTestVerify=ClientServiceFixtures.buildClient(clientToUpdate);
+    var clientToTestVerify = ClientServiceFixtures.buildClient(clientToUpdate);
     var updatedClient = clientController.update(clientToUpdate);
     Assertions.assertEquals(updatedClient, clientToUpdate);
     Mockito.verify(clientServiceSpy, Mockito.times(1)).update(Mockito.eq(clientToTestVerify));

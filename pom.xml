@@ -81,7 +81,7 @@
                 <version>2.9</version>
                 <configuration>
                     <sourceDirectory>src</sourceDirectory>
-                    <testSourceDirectory>test</testSourceDirectory>
+                    <testSourceDirectory>src/test</testSourceDirectory>
                     <verbose>false</verbose>
                     <filesNamePattern>.*\.java</filesNamePattern>
                     <skip>false</skip>

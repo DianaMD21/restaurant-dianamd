@@ -1,15 +1,16 @@
-package controllers.client;
+package com.diana.restaurant.controllers.client;
 
 import static org.junit.Assert.assertEquals;
 
-import java.com.restaurant.controllers.ClientController;
-import java.com.restaurant.entities.Client;
-import java.com.restaurant.enums.IocControllers;
-import java.com.restaurant.exceptions.services.EntityNotFoundException;
-import java.com.restaurant.ioc.Ioc;
+import com.diana.restaurant.controllers.ClientController;
+import com.diana.restaurant.entities.Client;
+import com.diana.restaurant.enums.IocControllers;
+import com.diana.restaurant.exceptions.services.EntityNotFoundException;
+import com.diana.restaurant.ioc.Ioc;
+import com.diana.restaurant.util.fixtures.ClientServiceFixtures;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import util.fixtures.ClientServiceFixtures;
 
 public class ClientControllerTest {
   private ClientController clientController;
@@ -29,7 +30,7 @@ public class ClientControllerTest {
   @Test
   public void add_ShouldInsertAClient() {
     var client = ClientServiceFixtures.buildClient();
-    assertEquals(client, clientController.add(client));
+    Assert.assertEquals(client, clientController.add(client));
   }
 
   @Test(expected = EntityNotFoundException.class)
@@ -39,7 +40,6 @@ public class ClientControllerTest {
     clientController.deleteById(client.getId());
     clientController.findById(newClient.getId());
   }
-
 
   @Test
   public void findById_ShouldReturnFoundClient() {
