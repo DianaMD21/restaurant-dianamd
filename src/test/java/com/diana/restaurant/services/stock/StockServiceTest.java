@@ -1,7 +1,5 @@
 package com.diana.restaurant.services.stock;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.entities.Stock;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
@@ -9,61 +7,63 @@ import com.diana.restaurant.exceptions.services.IdNullPointerException;
 import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.StockServiceImpl;
-import com.diana.restaurant.util.fixtures.StockFixtures;
-import com.diana.restaurant.util.fixtures.StockServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.entities.StockFixtures;
+import com.diana.restaurant.util.fixtures.services.StockServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StockServiceTest {
   private StockServiceImpl stockService;
 
-  @Before
+  @BeforeEach
   public void setup() {
     stockService = Ioc.getInstance().get(IocServices.STOCK_SERVICE_INSTANCE);
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void findById_ShouldThrowIdNullPointerException() {
-    stockService.findById(null);
+    Assertions.assertThrows(IdNullPointerException.class, () -> stockService.findById(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException() {
-    stockService.findById(10L);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> stockService.findById(10L));
   }
 
   @Test
   public void findById_ShouldReturnOptionalOfStock() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
-    assertEquals(newStock, stockService.findById(stock.getId()).get());
+    Assertions.assertEquals(newStock, stockService.findById(stock.getId()).get());
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
     stockService.delete(newStock.getId());
-    stockService.findById(newStock.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> stockService.findById(newStock.getId()));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void update_ShouldThrowIdNullPointerException() {
     var stock = new Stock();
-    stockService.update(stock);
+    Assertions.assertThrows(IdNullPointerException.class, () -> stockService.update(stock));
   }
 
-  @Test(expected = NullEntityException.class)
+  @Test()
   public void update_ShouldThrowNullEntityException() {
-    stockService.update(null);
+    Assertions.assertThrows(NullEntityException.class, () -> stockService.update(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void update_ShouldThrowEntityNotFoundException() {
     var stockExample = new Stock();
     stockExample.setId(StockFixtures.FAKEID);
     var stock = StockServiceFixtures.buildStock(stockExample);
-    stockService.update(stock);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> stockService.update(stock));
   }
 
   @Test
@@ -74,32 +74,32 @@ public class StockServiceTest {
     updatedStockExample.setName("Testing Fake Name");
     var updatedStock = StockServiceFixtures.buildStock(updatedStockExample);
     updatedStock.setId(stock.getId());
-    assertEquals(newStock, stockService.update(updatedStock));
+    Assertions.assertEquals(newStock, stockService.update(updatedStock));
   }
 
   @Test
   public void insert_ShouldInsertStock() {
     var stock = StockServiceFixtures.buildStock();
-    assertEquals(stock, stockService.insert(stock));
+    Assertions.assertEquals(stock, stockService.insert(stock));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void delete_ShouldThrowIdNullPointerException() {
     var stock = new Stock();
-    stockService.delete(stock.getId());
+    Assertions.assertThrows(IdNullPointerException.class, () -> stockService.delete(stock.getId()));
   }
 
   @Test
   public void delete_ShouldDeleteStock() {
     var stock = StockServiceFixtures.buildStock();
     var newStock = stockService.insert(stock);
-    assertEquals(newStock, stockService.delete(stock.getId()));
+    Assertions.assertEquals(newStock, stockService.delete(stock.getId()));
   }
 
   @Test
   public void findAll_ShouldReturnListOfStocks() {
     var stocks = StockServiceFixtures.buildStocks(3);
     stocks.stream().forEach(stockService::insert);
-    assertEquals(stocks, stockService.findAll());
+    Assertions.assertEquals(stocks, stockService.findAll());
   }
 }

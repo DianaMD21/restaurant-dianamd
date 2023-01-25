@@ -1,19 +1,18 @@
 package com.diana.restaurant.ioc;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.exceptions.ioc.IocDuplicatedKeyException;
 import com.diana.restaurant.exceptions.ioc.IocKeyNotFoundException;
 import com.diana.restaurant.exceptions.ioc.IocKeyNullPointerException;
 import com.diana.restaurant.exceptions.ioc.IocValueNullPointerException;
-import com.diana.restaurant.util.fixtures.IocFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.ioc.IocFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IocTest {
   private Ioc ioc = null;
 
-  @Before
+  @BeforeEach
   public void setup() {
     ioc = Ioc.getInstance();
     ioc.register(IocFixtures.TESTING_KEY_1, IocFixtures.TESTING_VALUE_1);
@@ -21,36 +20,39 @@ public class IocTest {
     ioc.register(IocFixtures.TESTING_KEY_3, IocFixtures.TESTING_VALUE_3);
   }
 
-  @Test(expected = IocKeyNullPointerException.class)
+  @Test()
   public void register_ShouldThrowIocKeyNullPointerException() {
-    ioc.register(null, IocFixtures.TESTING_VALUE_1);
-    ioc.register(null, null);
+    Assertions.assertThrows(
+        IocKeyNullPointerException.class, () -> ioc.register(null, IocFixtures.TESTING_VALUE_1));
+    Assertions.assertThrows(IocKeyNullPointerException.class, () -> ioc.register(null, null));
   }
 
-  @Test(expected = IocValueNullPointerException.class)
+  @Test()
   public void register_ShouldThrowIocValueNullPointerException() {
-    ioc.register("Test", null);
+    Assertions.assertThrows(IocValueNullPointerException.class, () -> ioc.register("Test", null));
   }
 
-  @Test(expected = IocDuplicatedKeyException.class)
+  @Test()
   public void register_ShouldThrowIocDuplicatedKeyException() {
-    ioc.register(IocFixtures.TESTING_KEY_1, IocFixtures.TESTING_VALUE_1);
+    Assertions.assertThrows(
+        IocDuplicatedKeyException.class,
+        () -> ioc.register(IocFixtures.TESTING_KEY_1, IocFixtures.TESTING_VALUE_1));
   }
 
-  @Test(expected = IocKeyNullPointerException.class)
+  @Test()
   public void get_ShouldThrowIocKeyNullPointerException() {
-    ioc.get(null);
+    Assertions.assertThrows(IocKeyNullPointerException.class, () -> ioc.get(null));
   }
 
-  @Test(expected = IocKeyNotFoundException.class)
+  @Test()
   public void get_ShouldThrowIocKeyNotFoundException() {
-    ioc.get("KeyTest1");
+    Assertions.assertThrows(IocKeyNotFoundException.class, () -> ioc.get("KeyTest1"));
   }
 
   @Test
   public void get_ShouldReturnValue() {
-    assertEquals(IocFixtures.TESTING_VALUE_1, ioc.get(IocFixtures.TESTING_KEY_1));
-    assertEquals(IocFixtures.TESTING_VALUE_2, ioc.get(IocFixtures.TESTING_KEY_2));
-    assertEquals(IocFixtures.TESTING_VALUE_3, ioc.get(IocFixtures.TESTING_KEY_3));
+    Assertions.assertEquals(IocFixtures.TESTING_VALUE_1, ioc.get(IocFixtures.TESTING_KEY_1));
+    Assertions.assertEquals(IocFixtures.TESTING_VALUE_2, ioc.get(IocFixtures.TESTING_KEY_2));
+    Assertions.assertEquals(IocFixtures.TESTING_VALUE_3, ioc.get(IocFixtures.TESTING_KEY_3));
   }
 }

@@ -1,7 +1,5 @@
 package com.diana.restaurant.services.tax;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.entities.Tax;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
@@ -9,98 +7,100 @@ import com.diana.restaurant.exceptions.services.IdNullPointerException;
 import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.TaxServiceImpl;
-import com.diana.restaurant.util.fixtures.TaxFixtures;
-import com.diana.restaurant.util.fixtures.TaxServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.entities.TaxFixtures;
+import com.diana.restaurant.util.fixtures.services.TaxServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TaxServiceTest {
   private TaxServiceImpl taxService;
 
-  @Before
+  @BeforeEach
   public void setup() {
     taxService = Ioc.getInstance().get(IocServices.TAX_SERVICE_INSTANCE);
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void findById_ShouldThrowIdNullPointerException() {
-    taxService.findById(null);
+    Assertions.assertThrows(IdNullPointerException.class, () -> taxService.findById(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException() {
-    taxService.findById(10L);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> taxService.findById(10L));
   }
 
   @Test
   public void findById_ShouldReturnOptionalOfTax() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax);
-    assertEquals(newTax, taxService.findById(tax.getId()).get());
+    Assertions.assertEquals(newTax, taxService.findById(tax.getId()).get());
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax);
     taxService.delete(newTax.getId());
-    taxService.findById(newTax.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> taxService.findById(newTax.getId()));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void update_ShouldThrowIdNullPointerException() {
     var tax = new Tax();
-    taxService.update(tax);
+    Assertions.assertThrows(IdNullPointerException.class, () -> taxService.update(tax));
   }
 
-  @Test(expected = NullEntityException.class)
+  @Test()
   public void update_ShouldThrowNullEntityException() {
-    taxService.update(null);
+    Assertions.assertThrows(NullEntityException.class, () -> taxService.update(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void update_ShouldThrowEntityNotFoundException() {
     var taxExample = new Tax();
     taxExample.setId(TaxFixtures.FAKEID);
     var tax = TaxServiceFixtures.buildTax(taxExample);
-    taxService.update(tax);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> taxService.update(tax));
   }
 
   @Test
   public void update_ShouldReturnUpdatedTax() {
     var tax = TaxServiceFixtures.buildTax();
-    var newTax = taxService.insert(tax);
     var updatedTaxExample = new Tax();
     updatedTaxExample.setName("Diana");
     updatedTaxExample.setTaxPercentage(5.6);
+    var newTax = taxService.insert(tax);
     var updatedTax = TaxServiceFixtures.buildTax(updatedTaxExample);
     updatedTax.setId(tax.getId());
-    assertEquals(newTax, taxService.update(updatedTax));
+    Assertions.assertEquals(newTax, taxService.update(updatedTax));
   }
 
   @Test
   public void insert_ShouldInsertTax() {
     var tax = TaxServiceFixtures.buildTax();
-    assertEquals(tax, taxService.insert(tax));
+    Assertions.assertEquals(tax, taxService.insert(tax));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void delete_ShouldThrowIdNullPointerException() {
     var tax = new Tax();
-    taxService.delete(tax.getId());
+    Assertions.assertThrows(IdNullPointerException.class, () -> taxService.delete(tax.getId()));
   }
 
   @Test
   public void delete_ShouldDeleteTax() {
     var tax = TaxServiceFixtures.buildTax();
     var newTax = taxService.insert(tax);
-    assertEquals(newTax, taxService.delete(tax.getId()));
+    Assertions.assertEquals(newTax, taxService.delete(tax.getId()));
   }
 
   @Test
   public void findAll_ShouldReturnListOfTaxes() {
     var taxes = TaxServiceFixtures.buildTaxes(3);
     taxes.stream().forEach(taxService::insert);
-    assertEquals(taxes, taxService.findAll());
+    Assertions.assertEquals(taxes, taxService.findAll());
   }
 }

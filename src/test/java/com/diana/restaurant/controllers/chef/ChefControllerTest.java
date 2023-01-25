@@ -1,21 +1,19 @@
 package com.diana.restaurant.controllers.chef;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.controllers.ChefController;
 import com.diana.restaurant.entities.Chef;
 import com.diana.restaurant.enums.IocControllers;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
 import com.diana.restaurant.ioc.Ioc;
-import com.diana.restaurant.util.fixtures.ChefServiceFixtures;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.services.ChefServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ChefControllerTest {
   private ChefController chefController;
 
-  @Before
+  @BeforeEach
   public void setup() {
     chefController = Ioc.getInstance().get(IocControllers.CHEF_CONTROLLER);
   }
@@ -24,39 +22,40 @@ public class ChefControllerTest {
   public void getAll_ShouldReturnListOfChefs() {
     var chefs = ChefServiceFixtures.buildChefs(3);
     chefs.stream().forEach(chefController::add);
-    assertEquals(chefs, chefController.getAll());
+    Assertions.assertEquals(chefs, chefController.getAll());
   }
 
   @Test
-  public void add_ShouldInsertAChef() {
+  public void add_ShouldInsertChef() {
     var chef = ChefServiceFixtures.buildChef();
-    Assert.assertEquals(chef, chefController.add(chef));
+    Assertions.assertEquals(chef, chefController.add(chef));
   }
 
-  @Test(expected = EntityNotFoundException.class)
-  public void delete_ShouldDeleteAChef() {
+  @Test()
+  public void delete_ShouldDeleteChef() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefController.add(chef);
     chefController.deleteById(chef.getId());
-    chefController.findById(newChef.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> chefController.findById(newChef.getId()));
   }
 
   @Test
   public void findById_ShouldReturnFoundChef() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefController.add(chef);
-    assertEquals(newChef, chefController.findById(chef.getId()));
+    Assertions.assertEquals(newChef, chefController.findById(chef.getId()));
   }
 
   @Test
   public void update_ShouldUpdateChef() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefController.add(chef);
     var updatedChefExample = new Chef();
     updatedChefExample.setName("Diana");
     updatedChefExample.setUsername("dxmd");
+    var newChef = chefController.add(chef);
     var updatedChef = ChefServiceFixtures.buildChef(updatedChefExample);
     updatedChef.setId(chef.getId());
-    assertEquals(newChef, chefController.update(updatedChef));
+    Assertions.assertEquals(newChef, chefController.update(updatedChef));
   }
 }
