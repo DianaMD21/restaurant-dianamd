@@ -3,17 +3,17 @@ package com.diana.restaurant.controllers.client;
 import com.diana.restaurant.controllers.ClientController;
 import com.diana.restaurant.services.implementation.ClientServiceImpl;
 import com.diana.restaurant.services.interfaces.ClientService;
-import com.diana.restaurant.util.fixtures.ClientServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.services.ClientServiceFixtures;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ClientControllerIntegrationTest {
   private ClientController clientController;
   private ClientService clientServiceSpy;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     ClientService clientService = new ClientServiceImpl();
     clientServiceSpy = Mockito.spy(clientService);
@@ -38,7 +38,7 @@ public class ClientControllerIntegrationTest {
   }
 
   @Test
-  public void add_ShouldInsertAClient() {
+  public void add_ShouldInsertClient() {
     var client = ClientServiceFixtures.buildClient();
     var clientInserted = clientController.add(client);
     Assertions.assertEquals(clientInserted, client);
@@ -46,7 +46,7 @@ public class ClientControllerIntegrationTest {
   }
 
   @Test
-  public void delete_ShouldDeleteAClient() {
+  public void delete_ShouldDeleteClient() {
     var clients = ClientServiceFixtures.buildClients(3);
     clients.stream().forEach(clientController::add);
     var deletedClient = clientController.deleteById(clients.get(0).getId());
@@ -57,7 +57,7 @@ public class ClientControllerIntegrationTest {
   }
 
   @Test
-  public void update_ShouldUpdateAClient() {
+  public void update_ShouldUpdateClient() {
     var clientToUpdate = ClientServiceFixtures.buildClient();
     clientController.add(clientToUpdate);
     clientToUpdate.setName("DIANA MARIA");

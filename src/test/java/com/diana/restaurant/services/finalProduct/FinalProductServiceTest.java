@@ -1,7 +1,5 @@
 package com.diana.restaurant.services.finalProduct;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.entities.FinalProduct;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
@@ -9,99 +7,105 @@ import com.diana.restaurant.exceptions.services.IdNullPointerException;
 import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.FinalProductServiceImpl;
-import com.diana.restaurant.util.fixtures.FinalProductFixtures;
-import com.diana.restaurant.util.fixtures.FinalProductServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.entities.FinalProductFixtures;
+import com.diana.restaurant.util.fixtures.services.FinalProductServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FinalProductServiceTest {
   private FinalProductServiceImpl finalProductService;
 
-  @Before
+  @BeforeEach
   public void setup() {
     finalProductService = Ioc.getInstance().get(IocServices.FINAL_PRODUCT_SERVICE_INSTANCE);
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void findById_ShouldThrowIdNullPointerException() {
-    finalProductService.findById(null);
+    Assertions.assertThrows(IdNullPointerException.class, () -> finalProductService.findById(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException() {
-    finalProductService.findById(10L);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> finalProductService.findById(10L));
   }
 
   @Test
   public void findById_ShouldReturnOptionalOfFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct);
-    assertEquals(newFinalProduct, finalProductService.findById(finalProduct.getId()).get());
+    Assertions.assertEquals(
+        newFinalProduct, finalProductService.findById(finalProduct.getId()).get());
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct);
     finalProductService.delete(newFinalProduct.getId());
-    finalProductService.findById(newFinalProduct.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> finalProductService.findById(newFinalProduct.getId()));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void update_ShouldThrowIdNullPointerException() {
     var finalProduct = new FinalProduct();
-    finalProductService.update(finalProduct);
+    Assertions.assertThrows(
+        IdNullPointerException.class, () -> finalProductService.update(finalProduct));
   }
 
-  @Test(expected = NullEntityException.class)
+  @Test()
   public void update_ShouldThrowNullEntityException() {
-    finalProductService.update(null);
+    Assertions.assertThrows(NullEntityException.class, () -> finalProductService.update(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void update_ShouldThrowEntityNotFoundException() {
     var finalProductExample = new FinalProduct();
     finalProductExample.setId(FinalProductFixtures.FAKEID);
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct(finalProductExample);
-    finalProductService.update(finalProduct);
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> finalProductService.update(finalProduct));
   }
 
   @Test
   public void update_ShouldReturnUpdatedFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    var newFinalProduct = finalProductService.insert(finalProduct);
     var updatedFinalProductExample = new FinalProduct();
     updatedFinalProductExample.setName("Diana");
     updatedFinalProductExample.setPrice(500.6);
+    var newFinalProduct = finalProductService.insert(finalProduct);
     var updatedFinalProduct =
         FinalProductServiceFixtures.buildFinalProduct(updatedFinalProductExample);
     updatedFinalProduct.setId(finalProduct.getId());
-    assertEquals(newFinalProduct, finalProductService.update(updatedFinalProduct));
+    Assertions.assertEquals(newFinalProduct, finalProductService.update(updatedFinalProduct));
   }
 
   @Test
   public void delete_ShouldInsertFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    assertEquals(finalProduct, finalProductService.insert(finalProduct));
+    Assertions.assertEquals(finalProduct, finalProductService.insert(finalProduct));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void delete_ShouldThrowIdNullPointerException() {
     var finalProduct = new FinalProduct();
-    finalProductService.delete(finalProduct.getId());
+    Assertions.assertThrows(
+        IdNullPointerException.class, () -> finalProductService.delete(finalProduct.getId()));
   }
 
   @Test
   public void delete_ShouldDeleteFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
     var newFinalProduct = finalProductService.insert(finalProduct);
-    assertEquals(newFinalProduct, finalProductService.delete(finalProduct.getId()));
+    Assertions.assertEquals(newFinalProduct, finalProductService.delete(finalProduct.getId()));
   }
 
   @Test
   public void findAll_ShouldReturnListOfFinalProducts() {
     var finalProducts = FinalProductServiceFixtures.buildFinalProducts(3);
     finalProducts.stream().forEach(finalProductService::insert);
-    assertEquals(finalProducts, finalProductService.findAll());
+    Assertions.assertEquals(finalProducts, finalProductService.findAll());
   }
 }

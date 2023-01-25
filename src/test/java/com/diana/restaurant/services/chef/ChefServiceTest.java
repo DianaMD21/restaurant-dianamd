@@ -1,7 +1,5 @@
 package com.diana.restaurant.services.chef;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.entities.Chef;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
@@ -9,98 +7,100 @@ import com.diana.restaurant.exceptions.services.IdNullPointerException;
 import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.ChefServiceImpl;
-import com.diana.restaurant.util.fixtures.ChefServiceFixtures;
-import com.diana.restaurant.util.fixtures.UserFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.entities.UserFixtures;
+import com.diana.restaurant.util.fixtures.services.ChefServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ChefServiceTest {
   private ChefServiceImpl chefService;
 
-  @Before
+  @BeforeEach
   public void setup() {
     chefService = Ioc.getInstance().get(IocServices.CHEF_SERVICE_INSTANCE);
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void findById_ShouldThrowIdNullPointerException() {
-    chefService.findById(null);
+    Assertions.assertThrows(IdNullPointerException.class, () -> chefService.findById(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException() {
-    chefService.findById(10L);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> chefService.findById(10L));
   }
 
   @Test
   public void findById_ShouldReturnOptionalOfChef() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef);
-    assertEquals(newChef, chefService.findById(chef.getId()).get());
+    Assertions.assertEquals(newChef, chefService.findById(chef.getId()).get());
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef);
     chefService.delete(newChef.getId());
-    chefService.findById(newChef.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> chefService.findById(newChef.getId()));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void update_ShouldThrowIdNullPointerException() {
     var chef = new Chef();
-    chefService.update(chef);
+    Assertions.assertThrows(IdNullPointerException.class, () -> chefService.update(chef));
   }
 
-  @Test(expected = NullEntityException.class)
+  @Test()
   public void update_ShouldThrowNullEntityException() {
-    chefService.update(null);
+    Assertions.assertThrows(NullEntityException.class, () -> chefService.update(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void update_ShouldThrowEntityNotFoundException() {
     var chefExample = new Chef();
     chefExample.setId(UserFixtures.FAKEID);
     var chef = ChefServiceFixtures.buildChef(chefExample);
-    chefService.update(chef);
+    Assertions.assertThrows(EntityNotFoundException.class, () -> chefService.update(chef));
   }
 
   @Test
   public void update_ShouldReturnUpdatedObject() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefService.insert(chef);
     var updatedChefExample = new Chef();
     updatedChefExample.setName("Diana");
     updatedChefExample.setUsername("dxmd");
+    var newChef = chefService.insert(chef);
     var updatedChef = ChefServiceFixtures.buildChef(updatedChefExample);
     updatedChef.setId(chef.getId());
-    assertEquals(newChef, chefService.update(updatedChef));
+    Assertions.assertEquals(newChef, chefService.update(updatedChef));
   }
 
   @Test
   public void insert_ShouldInsertChef() {
     var chef = ChefServiceFixtures.buildChef();
-    assertEquals(chef, chefService.insert(chef));
+    Assertions.assertEquals(chef, chefService.insert(chef));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void delete_ShouldThrowIdNullPointerException() {
     var chef = new Chef();
-    chefService.delete(chef.getId());
+    Assertions.assertThrows(IdNullPointerException.class, () -> chefService.delete(chef.getId()));
   }
 
   @Test
   public void delete_ShouldDeleteEntity() {
     var chef = ChefServiceFixtures.buildChef();
     var newChef = chefService.insert(chef);
-    assertEquals(newChef, chefService.delete(chef.getId()));
+    Assertions.assertEquals(newChef, chefService.delete(chef.getId()));
   }
 
   @Test
   public void findAll_ShouldReturnListOfChefs() {
     var chefs = ChefServiceFixtures.buildChefs(3);
     chefs.stream().forEach(chefService::insert);
-    assertEquals(chefs, chefService.findAll());
+    Assertions.assertEquals(chefs, chefService.findAll());
   }
 }

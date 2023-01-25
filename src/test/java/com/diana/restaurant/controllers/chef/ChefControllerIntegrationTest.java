@@ -3,17 +3,17 @@ package com.diana.restaurant.controllers.chef;
 import com.diana.restaurant.controllers.ChefController;
 import com.diana.restaurant.services.implementation.ChefServiceImpl;
 import com.diana.restaurant.services.interfaces.ChefService;
-import com.diana.restaurant.util.fixtures.ChefServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.services.ChefServiceFixtures;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ChefControllerIntegrationTest {
   private ChefController chefController;
   private ChefService chefServiceSpy;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     ChefService chefService = new ChefServiceImpl();
     chefServiceSpy = Mockito.spy(chefService);
@@ -38,7 +38,7 @@ public class ChefControllerIntegrationTest {
   }
 
   @Test
-  public void add_ShouldInsertAChef() {
+  public void add_ShouldInsertChef() {
     var chef = ChefServiceFixtures.buildChef();
     var chefInserted = chefController.add(chef);
     Assertions.assertEquals(chefInserted, chef);
@@ -46,7 +46,7 @@ public class ChefControllerIntegrationTest {
   }
 
   @Test
-  public void delete_ShouldDeleteAChef() {
+  public void delete_ShouldDeleteChef() {
     var chefs = ChefServiceFixtures.buildChefs(3);
     chefs.stream().forEach(chefController::add);
     var deletedChef = chefController.deleteById(chefs.get(0).getId());
@@ -57,7 +57,7 @@ public class ChefControllerIntegrationTest {
   }
 
   @Test
-  public void update_ShouldUpdateAChef() {
+  public void update_ShouldUpdateChef() {
     var chefToUpdate = ChefServiceFixtures.buildChef();
     chefController.add(chefToUpdate);
     chefToUpdate.setName("DIANA MARIA");

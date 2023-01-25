@@ -1,7 +1,5 @@
 package com.diana.restaurant.services.orderDetailProduct;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.entities.OrderDetailProduct;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.services.EntityNotFoundException;
@@ -9,65 +7,73 @@ import com.diana.restaurant.exceptions.services.IdNullPointerException;
 import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.OrderDetailProductServiceImpl;
-import com.diana.restaurant.util.fixtures.OrderDetailProductFixtures;
-import com.diana.restaurant.util.fixtures.OrderDetailProductServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
+import com.diana.restaurant.util.fixtures.entities.OrderDetailProductFixtures;
+import com.diana.restaurant.util.fixtures.services.OrderDetailProductServiceFixtures;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OrderDetailProductServiceTest {
   private OrderDetailProductServiceImpl orderDetailProductService;
 
-  @Before
+  @BeforeEach
   public void setup() {
     orderDetailProductService =
         Ioc.getInstance().get(IocServices.ORDER_DETAIL_PRODUCT_SERVICE_INSTANCE);
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void findById_ShouldThrowIdNullPointerException() {
-    orderDetailProductService.findById(null);
+    Assertions.assertThrows(
+        IdNullPointerException.class, () -> orderDetailProductService.findById(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException() {
-    orderDetailProductService.findById(10L);
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> orderDetailProductService.findById(10L));
   }
 
   @Test
   public void findById_ShouldReturnOptionalOfOrderDetailProduct() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct);
-    assertEquals(
+    Assertions.assertEquals(
         newOrderDetailProduct,
         orderDetailProductService.findById(orderDetailProduct.getId()).get());
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct);
     orderDetailProductService.delete(newOrderDetailProduct.getId());
-    orderDetailProductService.findById(newOrderDetailProduct.getId());
+    Assertions.assertThrows(
+        EntityNotFoundException.class,
+        () -> orderDetailProductService.findById(newOrderDetailProduct.getId()));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void update_ShouldThrowIdNullPointerException() {
     var orderDetailProduct = new OrderDetailProduct();
-    orderDetailProductService.update(orderDetailProduct);
+    Assertions.assertThrows(
+        IdNullPointerException.class, () -> orderDetailProductService.update(orderDetailProduct));
   }
 
-  @Test(expected = NullEntityException.class)
+  @Test()
   public void update_ShouldThrowNullEntityException() {
-    orderDetailProductService.update(null);
+    Assertions.assertThrows(
+        NullEntityException.class, () -> orderDetailProductService.update(null));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void update_ShouldThrowEntityNotFoundException() {
     var orderDetailProductExample = new OrderDetailProduct();
     orderDetailProductExample.setId(OrderDetailProductFixtures.FAKEID);
     var orderDetailProduct =
         OrderDetailProductServiceFixtures.buildOrderDetailProduct(orderDetailProductExample);
-    orderDetailProductService.update(orderDetailProduct);
+    Assertions.assertThrows(
+        EntityNotFoundException.class, () -> orderDetailProductService.update(orderDetailProduct));
   }
 
   @Test
@@ -79,27 +85,30 @@ public class OrderDetailProductServiceTest {
     var updatedOrderDetailProduct =
         OrderDetailProductServiceFixtures.buildOrderDetailProduct(updatedOrderDetailProductExample);
     updatedOrderDetailProduct.setId(orderDetailProduct.getId());
-    assertEquals(
+    Assertions.assertEquals(
         newOrderDetailProduct, orderDetailProductService.update(updatedOrderDetailProduct));
   }
 
   @Test
   public void insert_ShouldInsertOrderDetailProduct() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
-    assertEquals(orderDetailProduct, orderDetailProductService.insert(orderDetailProduct));
+    Assertions.assertEquals(
+        orderDetailProduct, orderDetailProductService.insert(orderDetailProduct));
   }
 
-  @Test(expected = IdNullPointerException.class)
+  @Test()
   public void delete_ShouldThrowIdNullPointerException() {
     var orderDetailProduct = new OrderDetailProduct();
-    orderDetailProductService.delete(orderDetailProduct.getId());
+    Assertions.assertThrows(
+        IdNullPointerException.class,
+        () -> orderDetailProductService.delete(orderDetailProduct.getId()));
   }
 
   @Test
   public void delete_ShouldDeleteOrderDetailProduct() {
     var orderDetailProduct = OrderDetailProductServiceFixtures.buildOrderDetailProduct();
     var newOrderDetailProduct = orderDetailProductService.insert(orderDetailProduct);
-    assertEquals(
+    Assertions.assertEquals(
         newOrderDetailProduct, orderDetailProductService.delete(orderDetailProduct.getId()));
   }
 
@@ -107,6 +116,6 @@ public class OrderDetailProductServiceTest {
   public void findAll_ShouldReturnListOfOrderDetailProducts() {
     var orderDetailProducts = OrderDetailProductServiceFixtures.buildOrderDetailProducts(3);
     orderDetailProducts.stream().forEach(orderDetailProductService::insert);
-    assertEquals(orderDetailProducts, orderDetailProductService.findAll());
+    Assertions.assertEquals(orderDetailProducts, orderDetailProductService.findAll());
   }
 }
