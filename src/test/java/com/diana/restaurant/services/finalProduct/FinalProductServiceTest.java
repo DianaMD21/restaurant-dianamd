@@ -34,7 +34,7 @@ public class FinalProductServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    var newFinalProduct = finalProductService.insert(finalProduct);
+    var newFinalProduct = finalProductService.add(finalProduct);
     Assertions.assertEquals(
         newFinalProduct, finalProductService.findById(finalProduct.getId()).get());
   }
@@ -42,7 +42,7 @@ public class FinalProductServiceTest {
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    var newFinalProduct = finalProductService.insert(finalProduct);
+    var newFinalProduct = finalProductService.add(finalProduct);
     finalProductService.delete(newFinalProduct.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> finalProductService.findById(newFinalProduct.getId()));
@@ -75,7 +75,7 @@ public class FinalProductServiceTest {
     var updatedFinalProductExample = new FinalProduct();
     updatedFinalProductExample.setName("Diana");
     updatedFinalProductExample.setPrice(500.6);
-    var newFinalProduct = finalProductService.insert(finalProduct);
+    var newFinalProduct = finalProductService.add(finalProduct);
     var updatedFinalProduct =
         FinalProductServiceFixtures.buildFinalProduct(updatedFinalProductExample);
     updatedFinalProduct.setId(finalProduct.getId());
@@ -83,9 +83,9 @@ public class FinalProductServiceTest {
   }
 
   @Test
-  public void delete_ShouldInsertFinalProduct() {
+  public void delete_ShouldAddFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    Assertions.assertEquals(finalProduct, finalProductService.insert(finalProduct));
+    Assertions.assertEquals(finalProduct, finalProductService.add(finalProduct));
   }
 
   @Test()
@@ -98,14 +98,20 @@ public class FinalProductServiceTest {
   @Test
   public void delete_ShouldDeleteFinalProduct() {
     var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
-    var newFinalProduct = finalProductService.insert(finalProduct);
+    var newFinalProduct = finalProductService.add(finalProduct);
     Assertions.assertEquals(newFinalProduct, finalProductService.delete(finalProduct.getId()));
+  }
+
+  @Test
+  public void add_ShouldAddClient() {
+    var finalProduct = FinalProductServiceFixtures.buildFinalProduct();
+    Assertions.assertEquals(finalProduct, finalProductService.add(finalProduct));
   }
 
   @Test
   public void findAll_ShouldReturnListOfFinalProducts() {
     var finalProducts = FinalProductServiceFixtures.buildFinalProducts(3);
-    finalProducts.stream().forEach(finalProductService::insert);
+    finalProducts.stream().forEach(finalProductService::add);
     Assertions.assertEquals(finalProducts, finalProductService.findAll());
   }
 }
