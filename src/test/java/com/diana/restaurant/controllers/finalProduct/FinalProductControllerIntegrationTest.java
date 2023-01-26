@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class FinalProductIntegrationTest {
+public class FinalProductControllerIntegrationTest {
   private FinalProductController finalProductController;
   private FinalProductService finalProductServiceSpy;
 
@@ -31,10 +31,10 @@ public class FinalProductIntegrationTest {
   }
 
   @Test
-  public void findAll_ShouldReturnAllFinalProducts() {
+  public void getAll_ShouldReturnAllFinalProducts() {
     var finalProducts = FinalProductServiceFixtures.buildFinalProducts(3);
     finalProducts.stream().forEach(finalProductController::add);
-    var finalProductsFound = finalProductController.findAll();
+    var finalProductsFound = finalProductController.getAll();
     Assertions.assertEquals(finalProducts, finalProductsFound);
   }
 

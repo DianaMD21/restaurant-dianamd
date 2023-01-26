@@ -12,8 +12,8 @@ public class FinalProductController {
     this.finalProductService = finalProductService;
   }
 
-  public List<FinalProduct> findAll() {
-    return this.finalProductService.findAll().stream().toList();
+  public List<FinalProduct> getAll() {
+    return this.finalProductService.getAll().stream().toList();
   }
 
   public FinalProduct findById(Long id) {

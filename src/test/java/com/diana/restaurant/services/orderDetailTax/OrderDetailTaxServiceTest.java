@@ -37,7 +37,7 @@ public class OrderDetailTaxServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
+    var newOrderDetailTax = orderDetailTaxService.add(orderDetailTax);
     Assertions.assertEquals(
         newOrderDetailTax, orderDetailTaxService.findById(orderDetailTax.getId()).get());
   }
@@ -45,7 +45,7 @@ public class OrderDetailTaxServiceTest {
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
+    var newOrderDetailTax = orderDetailTaxService.add(orderDetailTax);
     orderDetailTaxService.delete(newOrderDetailTax.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class,
@@ -76,7 +76,7 @@ public class OrderDetailTaxServiceTest {
   @Test
   public void update_ShouldReturnUpdatedOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
+    var newOrderDetailTax = orderDetailTaxService.add(orderDetailTax);
     var updatedOrderDetailTaxExample = new OrderDetailTax();
     var newOrderDetail = OrderDetailServiceFixtures.buildOrderDetail();
     updatedOrderDetailTaxExample.setOrderDetail(newOrderDetail);
@@ -87,9 +87,9 @@ public class OrderDetailTaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertOrderDetailTax() {
+  public void add_ShouldAddOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    Assertions.assertEquals(orderDetailTax, orderDetailTaxService.insert(orderDetailTax));
+    Assertions.assertEquals(orderDetailTax, orderDetailTaxService.add(orderDetailTax));
   }
 
   @Test()
@@ -102,15 +102,15 @@ public class OrderDetailTaxServiceTest {
   @Test
   public void delete_ShouldDeleteOrderDetailTax() {
     var orderDetailTax = OrderDetailTaxServiceFixtures.buildOrderDetailTax();
-    var newOrderDetailTax = orderDetailTaxService.insert(orderDetailTax);
+    var newOrderDetailTax = orderDetailTaxService.add(orderDetailTax);
     Assertions.assertEquals(
         newOrderDetailTax, orderDetailTaxService.delete(orderDetailTax.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfOrderDetailTaxs() {
+  public void getAll_ShouldReturnListOfOrderDetailTaxs() {
     var orderDetailTaxs = OrderDetailTaxServiceFixtures.buildOrderDetailTaxs(3);
-    orderDetailTaxs.stream().forEach(orderDetailTaxService::insert);
-    Assertions.assertEquals(orderDetailTaxs, orderDetailTaxService.findAll());
+    orderDetailTaxs.stream().forEach(orderDetailTaxService::add);
+    Assertions.assertEquals(orderDetailTaxs, orderDetailTaxService.getAll());
   }
 }

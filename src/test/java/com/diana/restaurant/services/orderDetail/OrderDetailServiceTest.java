@@ -34,14 +34,14 @@ public class OrderDetailServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfOrderDetail() {
     var orderDetail = OrderDetailServiceFixtures.buildOrderDetail();
-    var newOrderDetail = orderDetailService.insert(orderDetail);
+    var newOrderDetail = orderDetailService.add(orderDetail);
     Assertions.assertEquals(newOrderDetail, orderDetailService.findById(orderDetail.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderDetail = OrderDetailServiceFixtures.buildOrderDetail();
-    var newOrderDetail = orderDetailService.insert(orderDetail);
+    var newOrderDetail = orderDetailService.add(orderDetail);
     orderDetailService.delete(newOrderDetail.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> orderDetailService.findById(newOrderDetail.getId()));
@@ -71,7 +71,7 @@ public class OrderDetailServiceTest {
   @Test
   public void update_ShouldReturnUpdatedOrderDetail() {
     var orderDetail = OrderDetailServiceFixtures.buildOrderDetail();
-    var newOrderDetail = orderDetailService.insert(orderDetail);
+    var newOrderDetail = orderDetailService.add(orderDetail);
     var updatedOrderDetailExample = new OrderDetail();
     updatedOrderDetailExample.setQuantity(500.6);
     var updatedOrderDetail = OrderDetailServiceFixtures.buildOrderDetail(updatedOrderDetailExample);
@@ -80,9 +80,9 @@ public class OrderDetailServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertOrderDetail() {
+  public void add_ShouldAddOrderDetail() {
     var orderDetail = OrderDetailServiceFixtures.buildOrderDetail();
-    Assertions.assertEquals(orderDetail, orderDetailService.insert(orderDetail));
+    Assertions.assertEquals(orderDetail, orderDetailService.add(orderDetail));
   }
 
   @Test()
@@ -95,14 +95,14 @@ public class OrderDetailServiceTest {
   @Test
   public void delete_ShouldDeleteOrderDetail() {
     var orderDetail = OrderDetailServiceFixtures.buildOrderDetail();
-    var newOrderDetail = orderDetailService.insert(orderDetail);
+    var newOrderDetail = orderDetailService.add(orderDetail);
     Assertions.assertEquals(newOrderDetail, orderDetailService.delete(orderDetail.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfOrderDetails() {
+  public void getAll_ShouldReturnListOfOrderDetails() {
     var orderDetails = OrderDetailServiceFixtures.buildOrderDetails(3);
-    orderDetails.stream().forEach(orderDetailService::insert);
-    Assertions.assertEquals(orderDetails, orderDetailService.findAll());
+    orderDetails.stream().forEach(orderDetailService::add);
+    Assertions.assertEquals(orderDetails, orderDetailService.getAll());
   }
 }

@@ -34,14 +34,14 @@ public class ChefServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfChef() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefService.insert(chef);
+    var newChef = chefService.add(chef);
     Assertions.assertEquals(newChef, chefService.findById(chef.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefService.insert(chef);
+    var newChef = chefService.add(chef);
     chefService.delete(newChef.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> chefService.findById(newChef.getId()));
@@ -72,16 +72,16 @@ public class ChefServiceTest {
     var updatedChefExample = new Chef();
     updatedChefExample.setName("Diana");
     updatedChefExample.setUsername("dxmd");
-    var newChef = chefService.insert(chef);
+    var newChef = chefService.add(chef);
     var updatedChef = ChefServiceFixtures.buildChef(updatedChefExample);
     updatedChef.setId(chef.getId());
     Assertions.assertEquals(newChef, chefService.update(updatedChef));
   }
 
   @Test
-  public void insert_ShouldInsertChef() {
+  public void add_ShouldAddChef() {
     var chef = ChefServiceFixtures.buildChef();
-    Assertions.assertEquals(chef, chefService.insert(chef));
+    Assertions.assertEquals(chef, chefService.add(chef));
   }
 
   @Test()
@@ -93,14 +93,14 @@ public class ChefServiceTest {
   @Test
   public void delete_ShouldDeleteEntity() {
     var chef = ChefServiceFixtures.buildChef();
-    var newChef = chefService.insert(chef);
+    var newChef = chefService.add(chef);
     Assertions.assertEquals(newChef, chefService.delete(chef.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfChefs() {
+  public void getAll_ShouldReturnListOfChefs() {
     var chefs = ChefServiceFixtures.buildChefs(3);
-    chefs.stream().forEach(chefService::insert);
-    Assertions.assertEquals(chefs, chefService.findAll());
+    chefs.stream().forEach(chefService::add);
+    Assertions.assertEquals(chefs, chefService.getAll());
   }
 }

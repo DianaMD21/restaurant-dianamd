@@ -22,10 +22,10 @@ public class FinalProductControllerTest {
   @Test
   public void getAll_ShouldReturnListOfFinalProducts() {
     var finalProducts = FinalProductServiceFixtures.buildFinalProducts(3);
-    Mockito.when(finalProductServiceMock.findAll()).thenReturn(finalProducts);
-    var finalProductsReturned = finalProductController.findAll();
+    Mockito.when(finalProductServiceMock.getAll()).thenReturn(finalProducts);
+    var finalProductsReturned = finalProductController.getAll();
     Assertions.assertEquals(finalProducts, finalProductsReturned);
-    Mockito.verify(finalProductServiceMock, Mockito.times(1)).findAll();
+    Mockito.verify(finalProductServiceMock, Mockito.times(1)).getAll();
   }
 
   @Test

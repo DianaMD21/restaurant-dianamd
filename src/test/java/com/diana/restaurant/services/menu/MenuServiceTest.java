@@ -34,14 +34,14 @@ public class MenuServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfMenu() {
     var menu = MenuServiceFixtures.buildMenu();
-    var newMenu = menuService.insert(menu);
+    var newMenu = menuService.add(menu);
     Assertions.assertEquals(newMenu, menuService.findById(menu.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var menu = MenuServiceFixtures.buildMenu();
-    var newMenu = menuService.insert(menu);
+    var newMenu = menuService.add(menu);
     menuService.delete(newMenu.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> menuService.findById(newMenu.getId()));
@@ -69,7 +69,7 @@ public class MenuServiceTest {
   @Test
   public void update_ShouldReturnUpdatedMenu() {
     var menu = MenuServiceFixtures.buildMenu();
-    var newMenu = menuService.insert(menu);
+    var newMenu = menuService.add(menu);
     var updatedMenuExample = new Menu();
     updatedMenuExample.setName("Diana");
     var updatedMenu = MenuServiceFixtures.buildMenu(updatedMenuExample);
@@ -78,9 +78,9 @@ public class MenuServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertMenu() {
+  public void add_ShouldAddMenu() {
     var menu = MenuServiceFixtures.buildMenu();
-    Assertions.assertEquals(menu, menuService.insert(menu));
+    Assertions.assertEquals(menu, menuService.add(menu));
   }
 
   @Test()
@@ -92,14 +92,14 @@ public class MenuServiceTest {
   @Test
   public void delete_ShouldDeleteMenu() {
     var menu = MenuServiceFixtures.buildMenu();
-    var newMenu = menuService.insert(menu);
+    var newMenu = menuService.add(menu);
     Assertions.assertEquals(newMenu, menuService.delete(menu.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfMenus() {
+  public void getAll_ShouldReturnListOfMenus() {
     var menus = MenuServiceFixtures.buildMenus(3);
-    menus.stream().forEach(menuService::insert);
-    Assertions.assertEquals(menus, menuService.findAll());
+    menus.stream().forEach(menuService::add);
+    Assertions.assertEquals(menus, menuService.getAll());
   }
 }

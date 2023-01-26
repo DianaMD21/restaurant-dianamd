@@ -37,7 +37,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   }
 
   @Override
-  public E insert(E entity) {
+  public E add(E entity) {
     entity.setId(this.currentId);
     entity.setStatus(StatusEnum.ACTIVE);
     entity.setCreatedAt(Instant.now());
@@ -78,7 +78,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity<K>, K extends Seriali
   }
 
   @Override
-  public List<E> findAll() {
+  public List<E> getAll() {
     return this.entities.stream()
         .filter(e -> e.getStatus() != StatusEnum.DELETED)
         .collect(Collectors.toList());

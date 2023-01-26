@@ -30,7 +30,7 @@ public class ClientControllerIntegrationTest {
   }
 
   @Test
-  public void findAll_ShouldReturnAllClients() {
+  public void getAll_ShouldReturnAllClients() {
     var clients = ClientServiceFixtures.buildClients(3);
     clients.stream().forEach(clientController::add);
     var clientsFound = clientController.getAll();
@@ -38,11 +38,11 @@ public class ClientControllerIntegrationTest {
   }
 
   @Test
-  public void add_ShouldInsertClient() {
+  public void add_ShouldAddClient() {
     var client = ClientServiceFixtures.buildClient();
-    var clientInserted = clientController.add(client);
-    Assertions.assertEquals(clientInserted, client);
-    Mockito.verify(clientServiceSpy, Mockito.times(1)).insert(Mockito.eq(client));
+    var clientAdded = clientController.add(client);
+    Assertions.assertEquals(clientAdded, client);
+    Mockito.verify(clientServiceSpy, Mockito.times(1)).add(Mockito.eq(client));
   }
 
   @Test
@@ -61,7 +61,6 @@ public class ClientControllerIntegrationTest {
     var clientToUpdate = ClientServiceFixtures.buildClient();
     clientController.add(clientToUpdate);
     clientToUpdate.setName("DIANA MARIA");
-    clientToUpdate.setLastName("Monegro Diaz");
     var clientToTestVerify = ClientServiceFixtures.buildClient(clientToUpdate);
     var updatedClient = clientController.update(clientToUpdate);
     Assertions.assertEquals(updatedClient, clientToUpdate);

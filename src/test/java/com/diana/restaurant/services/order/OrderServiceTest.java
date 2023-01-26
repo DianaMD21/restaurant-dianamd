@@ -35,14 +35,14 @@ public class OrderServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfOrder() {
     var order = OrderServiceFixtures.buildOrder();
-    var newOrder = orderService.insert(order);
+    var newOrder = orderService.add(order);
     Assertions.assertEquals(newOrder, orderService.findById(order.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var order = OrderServiceFixtures.buildOrder();
-    var newOrder = orderService.insert(order);
+    var newOrder = orderService.add(order);
     orderService.delete(newOrder.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> orderService.findById(newOrder.getId()));
@@ -73,16 +73,16 @@ public class OrderServiceTest {
     var updatedOrderExample = new Order();
     updatedOrderExample.setStatus(StatusEnum.INACTIVE);
     updatedOrderExample.setTotal(500.6);
-    var newOrder = orderService.insert(order);
+    var newOrder = orderService.add(order);
     var updatedOrder = OrderServiceFixtures.buildOrder(updatedOrderExample);
     updatedOrder.setId(order.getId());
     Assertions.assertEquals(newOrder, orderService.update(updatedOrder));
   }
 
   @Test
-  public void insert_ShouldInsertOrder() {
+  public void add_ShouldAddOrder() {
     var order = OrderServiceFixtures.buildOrder();
-    Assertions.assertEquals(order, orderService.insert(order));
+    Assertions.assertEquals(order, orderService.add(order));
   }
 
   @Test()
@@ -94,14 +94,14 @@ public class OrderServiceTest {
   @Test
   public void delete_ShouldDeleteOrder() {
     var order = OrderServiceFixtures.buildOrder();
-    var newOrder = orderService.insert(order);
+    var newOrder = orderService.add(order);
     Assertions.assertEquals(newOrder, orderService.delete(order.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfOrders() {
+  public void getAll_ShouldReturnListOfOrders() {
     var orders = OrderServiceFixtures.buildOrders(3);
-    orders.stream().forEach(orderService::insert);
-    Assertions.assertEquals(orders, orderService.findAll());
+    orders.stream().forEach(orderService::add);
+    Assertions.assertEquals(orders, orderService.getAll());
   }
 }

@@ -4,16 +4,16 @@ import com.diana.restaurant.controllers.CashierController;
 import com.diana.restaurant.services.implementation.CashierServiceImpl;
 import com.diana.restaurant.services.interfaces.CashierService;
 import com.diana.restaurant.util.fixtures.services.CashierServiceFixtures;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class CashierControllerIntegrationTest {
   private CashierController cashierController;
   private CashierService cashierServiceSpy;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     CashierService cashierService = new CashierServiceImpl();
     cashierServiceSpy = Mockito.spy(cashierService);
@@ -30,7 +30,7 @@ public class CashierControllerIntegrationTest {
   }
 
   @Test
-  public void findAll_ShouldReturnAllCashiers() {
+  public void getAll_ShouldReturnAllCashiers() {
     var cashiers = CashierServiceFixtures.buildCashiers(3);
     cashiers.stream().forEach(cashierController::add);
     var cashiersFound = cashierController.getAll();
@@ -38,11 +38,11 @@ public class CashierControllerIntegrationTest {
   }
 
   @Test
-  public void add_ShouldInsertCashier() {
+  public void add_ShouldAddCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    var cashierInserted = cashierController.add(cashier);
-    Assertions.assertEquals(cashierInserted, cashier);
-    Mockito.verify(cashierServiceSpy, Mockito.times(1)).insert(Mockito.eq(cashier));
+    var cashierAdded = cashierController.add(cashier);
+    Assertions.assertEquals(cashierAdded, cashier);
+    Mockito.verify(cashierServiceSpy, Mockito.times(1)).add(Mockito.eq(cashier));
   }
 
   @Test
@@ -61,7 +61,6 @@ public class CashierControllerIntegrationTest {
     var cashierToUpdate = CashierServiceFixtures.buildCashier();
     cashierController.add(cashierToUpdate);
     cashierToUpdate.setName("DIANA MARIA");
-    cashierToUpdate.setLastName("Monegro Diaz");
     var cashierToTestVerify = CashierServiceFixtures.buildCashier(cashierToUpdate);
     var updatedCashier = cashierController.update(cashierToUpdate);
     Assertions.assertEquals(updatedCashier, cashierToUpdate);

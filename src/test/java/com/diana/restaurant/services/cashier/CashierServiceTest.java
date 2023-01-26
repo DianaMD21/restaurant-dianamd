@@ -34,14 +34,14 @@ public class CashierServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierService.insert(cashier);
+    var newCashier = cashierService.add(cashier);
     Assertions.assertEquals(newCashier, cashierService.findById(cashier.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierService.insert(cashier);
+    var newCashier = cashierService.add(cashier);
     cashierService.delete(newCashier.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> cashierService.findById(newCashier.getId()));
@@ -72,16 +72,16 @@ public class CashierServiceTest {
     var updatedCashierExample = new Cashier();
     updatedCashierExample.setName("Diana");
     updatedCashierExample.setUsername("dxmd");
-    var newCashier = cashierService.insert(cashier);
+    var newCashier = cashierService.add(cashier);
     var updatedCashier = CashierServiceFixtures.buildCashier(updatedCashierExample);
     updatedCashier.setId(cashier.getId());
     Assertions.assertEquals(newCashier, cashierService.update(updatedCashier));
   }
 
   @Test
-  public void insert_ShouldInsertCashier() {
+  public void add_ShouldAddCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    Assertions.assertEquals(cashier, cashierService.insert(cashier));
+    Assertions.assertEquals(cashier, cashierService.add(cashier));
   }
 
   @Test()
@@ -94,14 +94,14 @@ public class CashierServiceTest {
   @Test
   public void delete_ShouldDeleteCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierService.insert(cashier);
+    var newCashier = cashierService.add(cashier);
     Assertions.assertEquals(newCashier, cashierService.delete(cashier.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfCashiers() {
+  public void getAll_ShouldReturnListOfCashiers() {
     var cashiers = CashierServiceFixtures.buildCashiers(3);
-    cashiers.stream().forEach(cashierService::insert);
-    Assertions.assertEquals(cashiers, cashierService.findAll());
+    cashiers.stream().forEach(cashierService::add);
+    Assertions.assertEquals(cashiers, cashierService.getAll());
   }
 }

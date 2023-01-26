@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface BaseService<E, K> {
-  E insert(E entity);
 
   Optional<E> findById(K id);
 
@@ -12,9 +11,7 @@ public interface BaseService<E, K> {
 
   E update(E entity);
 
-  Collection<E> findAll();
+  Collection<E> getAll();
 
-  default E add(E entity) {
-    return this.insert(entity);
-  }
+  E add(E entity);
 }

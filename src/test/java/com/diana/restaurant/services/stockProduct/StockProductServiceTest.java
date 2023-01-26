@@ -34,7 +34,7 @@ public class StockProductServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfStockProduct() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
-    var newStockProduct = stockProductService.insert(stockProduct);
+    var newStockProduct = stockProductService.add(stockProduct);
     Assertions.assertEquals(
         newStockProduct, stockProductService.findById(stockProduct.getId()).get());
   }
@@ -42,7 +42,7 @@ public class StockProductServiceTest {
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
-    var newStockProduct = stockProductService.insert(stockProduct);
+    var newStockProduct = stockProductService.add(stockProduct);
     stockProductService.delete(newStockProduct.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> stockProductService.findById(newStockProduct.getId()));
@@ -72,7 +72,7 @@ public class StockProductServiceTest {
   @Test
   public void update_ShouldReturnUpdatedStockProduct() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
-    var newStockProduct = stockProductService.insert(stockProduct);
+    var newStockProduct = stockProductService.add(stockProduct);
     var updatedStockProductExample = new StockProduct();
     updatedStockProductExample.setQuantity(500.6);
     var updatedStockProduct =
@@ -82,9 +82,9 @@ public class StockProductServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertStockProduct() {
+  public void add_ShouldAddStockProduct() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
-    Assertions.assertEquals(stockProduct, stockProductService.insert(stockProduct));
+    Assertions.assertEquals(stockProduct, stockProductService.add(stockProduct));
   }
 
   @Test()
@@ -97,14 +97,14 @@ public class StockProductServiceTest {
   @Test
   public void delete_ShouldDeleteStockProduct() {
     var stockProduct = StockProductServiceFixtures.buildStockProduct();
-    var newStockProduct = stockProductService.insert(stockProduct);
+    var newStockProduct = stockProductService.add(stockProduct);
     Assertions.assertEquals(newStockProduct, stockProductService.delete(stockProduct.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfStockProducts() {
+  public void getAll_ShouldReturnListOfStockProducts() {
     var stockProducts = StockProductServiceFixtures.buildStockProducts(3);
-    stockProducts.stream().forEach(stockProductService::insert);
-    Assertions.assertEquals(stockProducts, stockProductService.findAll());
+    stockProducts.stream().forEach(stockProductService::add);
+    Assertions.assertEquals(stockProducts, stockProductService.getAll());
   }
 }

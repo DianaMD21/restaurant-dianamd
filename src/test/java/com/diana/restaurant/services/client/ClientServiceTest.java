@@ -24,7 +24,7 @@ public class ClientServiceTest {
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var client = ClientServiceFixtures.buildClient();
-    var newClient = clientService.insert(client);
+    var newClient = clientService.add(client);
     clientService.delete(newClient.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> clientService.findById(newClient.getId()));
@@ -43,7 +43,7 @@ public class ClientServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfClientFound() {
     var client = ClientServiceFixtures.buildClient();
-    var newClient = clientService.insert(client);
+    var newClient = clientService.add(client);
     Assertions.assertEquals(newClient, clientService.findById(client.getId()).get());
   }
 
@@ -53,7 +53,7 @@ public class ClientServiceTest {
     var updatedClientExample = new Client();
     updatedClientExample.setName("Diana");
     updatedClientExample.setUsername("dxmd");
-    var newClient = clientService.insert(client);
+    var newClient = clientService.add(client);
     var updatedClient = ClientServiceFixtures.buildClient(updatedClientExample);
     updatedClient.setId(client.getId());
     Assertions.assertEquals(newClient, clientService.update(updatedClient));
@@ -88,20 +88,20 @@ public class ClientServiceTest {
   @Test
   public void delete_ShouldDeletelient() {
     var client = ClientServiceFixtures.buildClient();
-    var newClient = clientService.insert(client);
+    var newClient = clientService.add(client);
     Assertions.assertEquals(newClient, clientService.delete(client.getId()));
   }
 
   @Test
-  public void insert_ShouldInsertClient() {
+  public void add_ShouldAddClient() {
     var client = ClientServiceFixtures.buildClient();
-    Assertions.assertEquals(client, clientService.insert(client));
+    Assertions.assertEquals(client, clientService.add(client));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfClients() {
+  public void getAll_ShouldReturnListOfClients() {
     var clients = ClientServiceFixtures.buildClients(3);
-    clients.stream().forEach(clientService::insert);
-    Assertions.assertEquals(clients, clientService.findAll());
+    clients.stream().forEach(clientService::add);
+    Assertions.assertEquals(clients, clientService.getAll());
   }
 }
