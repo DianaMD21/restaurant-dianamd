@@ -13,4 +13,8 @@ public interface BaseService<E, K> {
   E update(E entity);
 
   Collection<E> findAll();
+
+  default E add(E entity) {
+    return this.insert(entity);
+  }
 }
