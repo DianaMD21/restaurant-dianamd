@@ -34,14 +34,14 @@ public class WaiterServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    var newWaiter = waiterService.insert(waiter);
+    var newWaiter = waiterService.add(waiter);
     Assertions.assertEquals(newWaiter, waiterService.findById(waiter.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    var newWaiter = waiterService.insert(waiter);
+    var newWaiter = waiterService.add(waiter);
     waiterService.delete(newWaiter.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> waiterService.findById(newWaiter.getId()));
@@ -72,16 +72,16 @@ public class WaiterServiceTest {
     var updatedWaiterExample = new Waiter();
     updatedWaiterExample.setName("Diana");
     updatedWaiterExample.setUsername("dxmd");
-    var newWaiter = waiterService.insert(waiter);
+    var newWaiter = waiterService.add(waiter);
     var updatedWaiter = WaiterServiceFixtures.buildWaiter(updatedWaiterExample);
     updatedWaiter.setId(waiter.getId());
     Assertions.assertEquals(newWaiter, waiterService.update(updatedWaiter));
   }
 
   @Test
-  public void insert_ShouldInsertWaiter() {
+  public void add_ShouldAddWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    Assertions.assertEquals(waiter, waiterService.insert(waiter));
+    Assertions.assertEquals(waiter, waiterService.add(waiter));
   }
 
   @Test()
@@ -94,14 +94,14 @@ public class WaiterServiceTest {
   @Test
   public void delete_ShouldDeleteWaiter() {
     var waiter = WaiterServiceFixtures.buildWaiter();
-    var newWaiter = waiterService.insert(waiter);
+    var newWaiter = waiterService.add(waiter);
     Assertions.assertEquals(newWaiter, waiterService.delete(waiter.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfWaiters() {
+  public void getAll_ShouldReturnListOfWaiters() {
     var waiters = WaiterServiceFixtures.buildWaiters(3);
-    waiters.stream().forEach(waiterService::insert);
-    Assertions.assertEquals(waiters, waiterService.findAll());
+    waiters.stream().forEach(waiterService::add);
+    Assertions.assertEquals(waiters, waiterService.getAll());
   }
 }

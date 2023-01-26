@@ -109,9 +109,9 @@ public class FinalProductServiceTest {
   }
 
   @Test
-  public void findAll_ShouldReturnListOfFinalProducts() {
+  public void getAll_ShouldReturnListOfFinalProducts() {
     var finalProducts = FinalProductServiceFixtures.buildFinalProducts(3);
     finalProducts.stream().forEach(finalProductService::add);
-    Assertions.assertEquals(finalProducts, finalProductService.findAll());
+    Assertions.assertEquals(finalProducts, finalProductService.getAll());
   }
 }

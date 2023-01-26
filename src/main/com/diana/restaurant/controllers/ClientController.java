@@ -1,6 +1,7 @@
 package com.diana.restaurant.controllers;
 
 import com.diana.restaurant.entities.Client;
+import com.diana.restaurant.exceptions.services.EntityNotFoundException;
 import com.diana.restaurant.services.interfaces.ClientService;
 import java.util.List;
 
@@ -13,15 +14,17 @@ public class ClientController {
   }
 
   public List<Client> getAll() {
-    return this.clientService.findAll().stream().toList();
+    return this.clientService.getAll().stream().toList();
   }
 
   public Client findById(Long id) {
-    return this.clientService.findById(id).get();
+    return this.clientService
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException(Client.class, id));
   }
 
   public Client add(Client client) {
-    return this.clientService.insert(client);
+    return this.clientService.add(client);
   }
 
   public Client deleteById(Long id) {

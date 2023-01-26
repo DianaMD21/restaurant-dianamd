@@ -34,14 +34,14 @@ public class ProductServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfProduct() {
     var product = ProductServiceFixtures.buildProduct();
-    var newProduct = productService.insert(product);
+    var newProduct = productService.add(product);
     Assertions.assertEquals(newProduct, productService.findById(product.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var product = ProductServiceFixtures.buildProduct();
-    var newProduct = productService.insert(product);
+    var newProduct = productService.add(product);
     productService.delete(newProduct.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> productService.findById(newProduct.getId()));
@@ -72,16 +72,16 @@ public class ProductServiceTest {
     var updatedProductExample = new Product();
     updatedProductExample.setName("Diana");
     updatedProductExample.setPrice(500.6);
-    var newProduct = productService.insert(product);
+    var newProduct = productService.add(product);
     var updatedProduct = ProductServiceFixtures.buildProduct(updatedProductExample);
     updatedProduct.setId(product.getId());
     Assertions.assertEquals(newProduct, productService.update(updatedProduct));
   }
 
   @Test
-  public void insert_ShouldInsertProduct() {
+  public void add_ShouldAddProduct() {
     var product = ProductServiceFixtures.buildProduct();
-    Assertions.assertEquals(product, productService.insert(product));
+    Assertions.assertEquals(product, productService.add(product));
   }
 
   @Test()
@@ -94,14 +94,14 @@ public class ProductServiceTest {
   @Test
   public void delete_ShouldDeleteProduct() {
     var product = ProductServiceFixtures.buildProduct();
-    var newProduct = productService.insert(product);
+    var newProduct = productService.add(product);
     Assertions.assertEquals(newProduct, productService.delete(product.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfProducts() {
+  public void getAll_ShouldReturnListOfProducts() {
     var products = ProductServiceFixtures.buildProducts(3);
-    products.stream().forEach(productService::insert);
-    Assertions.assertEquals(products, productService.findAll());
+    products.stream().forEach(productService::add);
+    Assertions.assertEquals(products, productService.getAll());
   }
 }

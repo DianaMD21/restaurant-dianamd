@@ -37,7 +37,7 @@ public class FinalProductProductTest {
   @Test
   public void findById_ShouldReturnOptionalOfFinalProductProduct() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
-    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
+    var newFinalProductProduct = finalProductProductService.add(finalProductProduct);
     Assertions.assertEquals(
         newFinalProductProduct,
         finalProductProductService.findById(finalProductProduct.getId()).get());
@@ -46,7 +46,7 @@ public class FinalProductProductTest {
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
-    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
+    var newFinalProductProduct = finalProductProductService.add(finalProductProduct);
     finalProductProductService.delete(newFinalProductProduct.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class,
@@ -80,7 +80,7 @@ public class FinalProductProductTest {
   @Test
   public void update_ShouldReturnUpdatedFinalProductProduct() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
-    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
+    var newFinalProductProduct = finalProductProductService.add(finalProductProduct);
     var updatedFinalProductProductExample = new FinalProductProduct();
     updatedFinalProductProductExample.setQuantity(500.6);
     var updatedFinalProductProduct =
@@ -92,10 +92,10 @@ public class FinalProductProductTest {
   }
 
   @Test
-  public void insert_ShouldInsertFinalProductProduct() {
+  public void add_ShouldAddFinalProductProduct() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
     Assertions.assertEquals(
-        finalProductProduct, finalProductProductService.insert(finalProductProduct));
+        finalProductProduct, finalProductProductService.add(finalProductProduct));
   }
 
   @Test()
@@ -109,15 +109,15 @@ public class FinalProductProductTest {
   @Test
   public void delete_ShouldDeleteFinalProductProduct() {
     var finalProductProduct = FinalProductProductServiceFixtures.buildFinalProductProduct();
-    var newFinalProductProduct = finalProductProductService.insert(finalProductProduct);
+    var newFinalProductProduct = finalProductProductService.add(finalProductProduct);
     Assertions.assertEquals(
         newFinalProductProduct, finalProductProductService.delete(finalProductProduct.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfFinalProductProducts() {
+  public void getAll_ShouldReturnListOfFinalProductProducts() {
     var finalProductProducts = FinalProductProductServiceFixtures.buildFinalProductProducts(3);
-    finalProductProducts.stream().forEach(finalProductProductService::insert);
-    Assertions.assertEquals(finalProductProducts, finalProductProductService.findAll());
+    finalProductProducts.stream().forEach(finalProductProductService::add);
+    Assertions.assertEquals(finalProductProducts, finalProductProductService.getAll());
   }
 }

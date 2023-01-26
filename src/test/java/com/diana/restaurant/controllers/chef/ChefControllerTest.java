@@ -26,7 +26,7 @@ public class ChefControllerTest {
   }
 
   @Test
-  public void add_ShouldInsertChef() {
+  public void add_ShouldAddChef() {
     var chef = ChefServiceFixtures.buildChef();
     Assertions.assertEquals(chef, chefController.add(chef));
   }

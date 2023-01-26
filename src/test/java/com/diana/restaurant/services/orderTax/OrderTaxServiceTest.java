@@ -34,14 +34,14 @@ public class OrderTaxServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    var newOrderTax = orderTaxService.insert(orderTax);
+    var newOrderTax = orderTaxService.add(orderTax);
     Assertions.assertEquals(newOrderTax, orderTaxService.findById(orderTax.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    var newOrderTax = orderTaxService.insert(orderTax);
+    var newOrderTax = orderTaxService.add(orderTax);
     orderTaxService.delete(newOrderTax.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> orderTaxService.findById(newOrderTax.getId()));
@@ -69,7 +69,7 @@ public class OrderTaxServiceTest {
   @Test
   public void update_ShouldReturnUpdatedOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    var newOrderTax = orderTaxService.insert(orderTax);
+    var newOrderTax = orderTaxService.add(orderTax);
     var updatedOrderTaxExample = new OrderTax();
     updatedOrderTaxExample.setOrder(null);
     var updatedOrderTax = OrderTaxServiceFixtures.buildOrderTax(updatedOrderTaxExample);
@@ -78,9 +78,9 @@ public class OrderTaxServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertOrderTax() {
+  public void add_ShouldAddOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    Assertions.assertEquals(orderTax, orderTaxService.insert(orderTax));
+    Assertions.assertEquals(orderTax, orderTaxService.add(orderTax));
   }
 
   @Test()
@@ -93,14 +93,14 @@ public class OrderTaxServiceTest {
   @Test
   public void delete_ShouldDeleteOrderTax() {
     var orderTax = OrderTaxServiceFixtures.buildOrderTax();
-    var newOrderTax = orderTaxService.insert(orderTax);
+    var newOrderTax = orderTaxService.add(orderTax);
     Assertions.assertEquals(newOrderTax, orderTaxService.delete(orderTax.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfOrderTaxs() {
+  public void getAll_ShouldReturnListOfOrderTaxs() {
     var orderTaxs = OrderTaxServiceFixtures.buildOrderTaxs(3);
-    orderTaxs.stream().forEach(orderTaxService::insert);
-    Assertions.assertEquals(orderTaxs, orderTaxService.findAll());
+    orderTaxs.stream().forEach(orderTaxService::add);
+    Assertions.assertEquals(orderTaxs, orderTaxService.getAll());
   }
 }

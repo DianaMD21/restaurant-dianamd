@@ -34,14 +34,14 @@ public class TaxServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfTax() {
     var tax = TaxServiceFixtures.buildTax();
-    var newTax = taxService.insert(tax);
+    var newTax = taxService.add(tax);
     Assertions.assertEquals(newTax, taxService.findById(tax.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var tax = TaxServiceFixtures.buildTax();
-    var newTax = taxService.insert(tax);
+    var newTax = taxService.add(tax);
     taxService.delete(newTax.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> taxService.findById(newTax.getId()));
@@ -72,16 +72,16 @@ public class TaxServiceTest {
     var updatedTaxExample = new Tax();
     updatedTaxExample.setName("Diana");
     updatedTaxExample.setTaxPercentage(5.6);
-    var newTax = taxService.insert(tax);
+    var newTax = taxService.add(tax);
     var updatedTax = TaxServiceFixtures.buildTax(updatedTaxExample);
     updatedTax.setId(tax.getId());
     Assertions.assertEquals(newTax, taxService.update(updatedTax));
   }
 
   @Test
-  public void insert_ShouldInsertTax() {
+  public void add_ShouldAddTax() {
     var tax = TaxServiceFixtures.buildTax();
-    Assertions.assertEquals(tax, taxService.insert(tax));
+    Assertions.assertEquals(tax, taxService.add(tax));
   }
 
   @Test()
@@ -93,14 +93,14 @@ public class TaxServiceTest {
   @Test
   public void delete_ShouldDeleteTax() {
     var tax = TaxServiceFixtures.buildTax();
-    var newTax = taxService.insert(tax);
+    var newTax = taxService.add(tax);
     Assertions.assertEquals(newTax, taxService.delete(tax.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfTaxes() {
+  public void getAll_ShouldReturnListOfTaxes() {
     var taxes = TaxServiceFixtures.buildTaxes(3);
-    taxes.stream().forEach(taxService::insert);
-    Assertions.assertEquals(taxes, taxService.findAll());
+    taxes.stream().forEach(taxService::add);
+    Assertions.assertEquals(taxes, taxService.getAll());
   }
 }

@@ -30,7 +30,7 @@ public class ChefControllerIntegrationTest {
   }
 
   @Test
-  public void findAll_ShouldReturnAllChefs() {
+  public void getAll_ShouldReturnAllChefs() {
     var chefs = ChefServiceFixtures.buildChefs(3);
     chefs.stream().forEach(chefController::add);
     var chefsFound = chefController.getAll();
@@ -38,11 +38,11 @@ public class ChefControllerIntegrationTest {
   }
 
   @Test
-  public void add_ShouldInsertChef() {
+  public void add_ShouldAddChef() {
     var chef = ChefServiceFixtures.buildChef();
-    var chefInserted = chefController.add(chef);
-    Assertions.assertEquals(chefInserted, chef);
-    Mockito.verify(chefServiceSpy, Mockito.times(1)).insert(Mockito.eq(chef));
+    var chefAdded = chefController.add(chef);
+    Assertions.assertEquals(chefAdded, chef);
+    Mockito.verify(chefServiceSpy, Mockito.times(1)).add(Mockito.eq(chef));
   }
 
   @Test

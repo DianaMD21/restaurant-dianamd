@@ -1,62 +1,73 @@
 package com.diana.restaurant.controllers.cashier;
 
-import static org.junit.Assert.assertEquals;
-
 import com.diana.restaurant.controllers.CashierController;
-import com.diana.restaurant.entities.Cashier;
-import com.diana.restaurant.enums.IocControllers;
-import com.diana.restaurant.exceptions.services.EntityNotFoundException;
-import com.diana.restaurant.ioc.Ioc;
+import com.diana.restaurant.services.interfaces.CashierService;
 import com.diana.restaurant.util.fixtures.services.CashierServiceFixtures;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.Optional;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class CashierControllerTest {
   private CashierController cashierController;
+  private CashierService cashierServiceMock;
 
-  @Before
+  @BeforeEach
   public void setup() {
-    cashierController = Ioc.getInstance().get(IocControllers.CASHIER_CONTROLLER);
+    cashierServiceMock = Mockito.mock(CashierService.class);
+    cashierController = new CashierController(cashierServiceMock);
   }
 
   @Test
   public void getAll_ShouldReturnListOfCashiers() {
     var cashiers = CashierServiceFixtures.buildCashiers(3);
-    cashiers.stream().forEach(cashierController::add);
-    assertEquals(cashiers, cashierController.getAll());
+    Mockito.when(cashierServiceMock.getAll()).thenReturn(cashiers);
+    var cashiersReturned = cashierController.getAll();
+    Assertions.assertEquals(cashiers, cashiersReturned);
+    Mockito.verify(cashierServiceMock, Mockito.times(1)).getAll();
   }
 
   @Test
-  public void add_ShouldInsertCashier() {
+  public void add_ShouldAddCashier() {
     var cashier = CashierServiceFixtures.buildCashier();
-    Assert.assertEquals(cashier, cashierController.add(cashier));
+    var expectedCashier = CashierServiceFixtures.buildCashier(1L);
+    Mockito.when(cashierServiceMock.add(Mockito.eq(cashier))).thenReturn(expectedCashier);
+    var cashierAdded = cashierController.add(cashier);
+    Assertions.assertEquals(expectedCashier, cashierAdded);
+    Mockito.verify(cashierServiceMock, Mockito.times(1)).add(Mockito.eq(cashier));
   }
 
-  @Test(expected = EntityNotFoundException.class)
+  @Test()
   public void delete_ShouldDeleteCashier() {
-    var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierController.add(cashier);
-    cashierController.deleteById(cashier.getId());
-    cashierController.findById(newCashier.getId());
+    var cashier = CashierServiceFixtures.buildCashier(1L);
+    Mockito.when(cashierServiceMock.delete(cashier.getId())).thenReturn(cashier);
+    var cashierDeleted = cashierController.deleteById(cashier.getId());
+    Assertions.assertEquals(cashier, cashierDeleted);
+    var cashierToTestVerify = CashierServiceFixtures.buildCashier(cashier);
+    Mockito.verify(cashierServiceMock, Mockito.times(1))
+        .delete(Mockito.eq(cashierToTestVerify.getId()));
   }
 
   @Test
   public void findById_ShouldReturnFoundCashier() {
-    var cashier = CashierServiceFixtures.buildCashier();
-    var newCashier = cashierController.add(cashier);
-    assertEquals(newCashier, cashierController.findById(cashier.getId()));
+    var cashier = CashierServiceFixtures.buildCashier(1L);
+    Mockito.when(cashierServiceMock.findById(cashier.getId())).thenReturn(Optional.of(cashier));
+    var cashierFound = cashierController.findById(cashier.getId());
+    Assertions.assertEquals(cashier, cashierFound);
+    var cashierToTestVerify = CashierServiceFixtures.buildCashier(cashier);
+    Mockito.verify(cashierServiceMock, Mockito.times(1))
+        .findById(Mockito.eq(cashierToTestVerify.getId()));
   }
 
   @Test
   public void update_ShouldUpdateCashier() {
-    var cashier = CashierServiceFixtures.buildCashier();
-    var updatedCashierExample = new Cashier();
-    updatedCashierExample.setName("Diana");
-    updatedCashierExample.setUsername("dxmd");
-    var newCashier = cashierController.add(cashier);
-    var updatedCashier = CashierServiceFixtures.buildCashier(updatedCashierExample);
-    updatedCashier.setId(cashier.getId());
-    assertEquals(newCashier, cashierController.update(updatedCashier));
+    var cashierToUpdate = CashierServiceFixtures.buildCashier(1L);
+    cashierToUpdate.setName("Diana");
+    Mockito.when(cashierServiceMock.update(cashierToUpdate)).thenReturn(cashierToUpdate);
+    var cashierToTestVerify = CashierServiceFixtures.buildCashier(cashierToUpdate);
+    var cashierUpdated = cashierController.update(cashierToUpdate);
+    Assertions.assertEquals(cashierToUpdate, cashierUpdated);
+    Mockito.verify(cashierServiceMock, Mockito.times(1)).update(Mockito.eq(cashierToTestVerify));
   }
 }

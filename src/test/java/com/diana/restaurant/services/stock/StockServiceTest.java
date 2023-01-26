@@ -34,14 +34,14 @@ public class StockServiceTest {
   @Test
   public void findById_ShouldReturnOptionalOfStock() {
     var stock = StockServiceFixtures.buildStock();
-    var newStock = stockService.insert(stock);
+    var newStock = stockService.add(stock);
     Assertions.assertEquals(newStock, stockService.findById(stock.getId()).get());
   }
 
   @Test()
   public void findById_ShouldThrowEntityNotFoundException_WhenStatusIsDeleted() {
     var stock = StockServiceFixtures.buildStock();
-    var newStock = stockService.insert(stock);
+    var newStock = stockService.add(stock);
     stockService.delete(newStock.getId());
     Assertions.assertThrows(
         EntityNotFoundException.class, () -> stockService.findById(newStock.getId()));
@@ -69,7 +69,7 @@ public class StockServiceTest {
   @Test
   public void update_ShouldReturnUpdatedStock() {
     var stock = StockServiceFixtures.buildStock();
-    var newStock = stockService.insert(stock);
+    var newStock = stockService.add(stock);
     var updatedStockExample = new Stock();
     updatedStockExample.setName("Testing Fake Name");
     var updatedStock = StockServiceFixtures.buildStock(updatedStockExample);
@@ -78,9 +78,9 @@ public class StockServiceTest {
   }
 
   @Test
-  public void insert_ShouldInsertStock() {
+  public void add_ShouldAddStock() {
     var stock = StockServiceFixtures.buildStock();
-    Assertions.assertEquals(stock, stockService.insert(stock));
+    Assertions.assertEquals(stock, stockService.add(stock));
   }
 
   @Test()
@@ -92,14 +92,14 @@ public class StockServiceTest {
   @Test
   public void delete_ShouldDeleteStock() {
     var stock = StockServiceFixtures.buildStock();
-    var newStock = stockService.insert(stock);
+    var newStock = stockService.add(stock);
     Assertions.assertEquals(newStock, stockService.delete(stock.getId()));
   }
 
   @Test
-  public void findAll_ShouldReturnListOfStocks() {
+  public void getAll_ShouldReturnListOfStocks() {
     var stocks = StockServiceFixtures.buildStocks(3);
-    stocks.stream().forEach(stockService::insert);
-    Assertions.assertEquals(stocks, stockService.findAll());
+    stocks.stream().forEach(stockService::add);
+    Assertions.assertEquals(stocks, stockService.getAll());
   }
 }
