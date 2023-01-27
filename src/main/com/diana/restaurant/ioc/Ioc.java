@@ -4,6 +4,7 @@ import com.diana.restaurant.controllers.CashierController;
 import com.diana.restaurant.controllers.ChefController;
 import com.diana.restaurant.controllers.ClientController;
 import com.diana.restaurant.controllers.FinalProductController;
+import com.diana.restaurant.controllers.FinalProductProductController;
 import com.diana.restaurant.enums.IocControllers;
 import com.diana.restaurant.enums.IocServices;
 import com.diana.restaurant.exceptions.ioc.IocDuplicatedKeyException;
@@ -50,8 +51,12 @@ public class Ioc {
         IocControllers.CASHIER_CONTROLLER,
         new CashierController(this.get(IocServices.CASHIER_SERVICE_INSTANCE)));
     instanceMap.put(
-        IocControllers.FINAL_PRODUCT_CONTROLER,
+        IocControllers.FINAL_PRODUCT_CONTROLLER,
         new FinalProductController(this.get(IocServices.FINAL_PRODUCT_SERVICE_INSTANCE)));
+    instanceMap.put(
+        IocControllers.FINAL_PRODUCT_PRODUCT_CONTROLLER,
+        new FinalProductProductController(
+            this.get(IocServices.FINAL_PRODUCT_PRODUCT_SERVICE_INSTANCE)));
   }
 
   private void registerServices(Map<String, Object> instanceMap) {
