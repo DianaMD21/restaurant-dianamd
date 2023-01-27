@@ -13,7 +13,7 @@ public class FinalProductController {
   }
 
   public List<FinalProduct> getAll() {
-    return this.finalProductService.getAll().stream().toList();
+    return this.finalProductService.getAll();
   }
 
   public FinalProduct findById(Long id) {

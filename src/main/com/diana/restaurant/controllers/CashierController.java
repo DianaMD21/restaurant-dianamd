@@ -13,7 +13,7 @@ public class CashierController {
   }
 
   public List<Cashier> getAll() {
-    return this.cashierService.getAll().stream().toList();
+    return this.cashierService.getAll();
   }
 
   public Cashier findById(Long id) {

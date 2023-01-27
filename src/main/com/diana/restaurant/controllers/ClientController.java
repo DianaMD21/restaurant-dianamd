@@ -14,7 +14,7 @@ public class ClientController {
   }
 
   public List<Client> getAll() {
-    return this.clientService.getAll().stream().toList();
+    return this.clientService.getAll();
   }
 
   public Client findById(Long id) {

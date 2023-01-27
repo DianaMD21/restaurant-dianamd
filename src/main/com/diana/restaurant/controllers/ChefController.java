@@ -13,7 +13,7 @@ public class ChefController {
   }
 
   public List<Chef> getAll() {
-    return this.chefService.getAll().stream().toList();
+    return this.chefService.getAll();
   }
 
   public Chef findById(Long id) {
