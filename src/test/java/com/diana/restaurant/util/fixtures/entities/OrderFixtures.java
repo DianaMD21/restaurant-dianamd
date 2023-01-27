@@ -4,6 +4,7 @@ import com.diana.restaurant.entities.Order;
 import com.diana.restaurant.enums.OrderStatusEnum;
 import com.diana.restaurant.util.fixtures.services.CashierServiceFixtures;
 import com.diana.restaurant.util.fixtures.services.ClientServiceFixtures;
+import com.diana.restaurant.util.fixtures.services.OrderDetailServiceFixtures;
 import com.diana.restaurant.util.fixtures.services.WaiterServiceFixtures;
 import java.util.Optional;
 

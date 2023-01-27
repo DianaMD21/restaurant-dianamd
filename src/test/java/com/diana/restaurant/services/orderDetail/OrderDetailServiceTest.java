@@ -8,7 +8,7 @@ import com.diana.restaurant.exceptions.services.NullEntityException;
 import com.diana.restaurant.ioc.Ioc;
 import com.diana.restaurant.services.implementation.OrderDetailServiceImpl;
 import com.diana.restaurant.util.fixtures.entities.OrderDetailFixtures;
-import com.diana.restaurant.util.fixtures.entities.OrderDetailServiceFixtures;
+import com.diana.restaurant.util.fixtures.services.OrderDetailServiceFixtures;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
