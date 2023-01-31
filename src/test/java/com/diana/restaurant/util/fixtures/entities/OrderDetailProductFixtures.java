@@ -3,6 +3,7 @@ package com.diana.restaurant.util.fixtures.entities;
 import com.diana.restaurant.entities.OrderDetailProduct;
 import com.diana.restaurant.enums.MeasureUnitEnum;
 import com.diana.restaurant.util.fixtures.services.FinalProductServiceFixtures;
+import com.diana.restaurant.util.fixtures.services.OrderDetailServiceFixtures;
 import java.util.Optional;
 
 public final class OrderDetailProductFixtures {

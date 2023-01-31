@@ -8,4 +8,5 @@ public final class IocControllers {
   public static final String FINAL_PRODUCT_PRODUCT_CONTROLLER = "finalProductProductController";
   public static final String MENU_CONTROLLER = "menuController";
   public static final String ORDER_CONTROLLER = "orderController";
+  public static final String ORDER_DETAIL_CONTROLLER = "orderDetailController";
 }
