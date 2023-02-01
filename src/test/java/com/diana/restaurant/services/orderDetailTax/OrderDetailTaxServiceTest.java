@@ -108,9 +108,9 @@ public class OrderDetailTaxServiceTest {
   }
 
   @Test
-  public void getAll_ShouldReturnListOfOrderDetailTaxs() {
-    var orderDetailTaxs = OrderDetailTaxServiceFixtures.buildOrderDetailTaxs(3);
-    orderDetailTaxs.stream().forEach(orderDetailTaxService::add);
-    Assertions.assertEquals(orderDetailTaxs, orderDetailTaxService.getAll());
+  public void getAll_ShouldReturnListOfOrderDetailTaxes() {
+    var orderDetailTaxes = OrderDetailTaxServiceFixtures.buildOrderDetailTaxes(3);
+    orderDetailTaxes.stream().forEach(orderDetailTaxService::add);
+    Assertions.assertEquals(orderDetailTaxes, orderDetailTaxService.getAll());
   }
 }
