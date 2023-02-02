@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public final class OrderTaxServiceFixtures {
-  public static List<OrderTax> buildOrderTaxs(Integer size) {
+  public static List<OrderTax> buildOrderTaxes(Integer size) {
     return LongStream.range(0, size)
         .mapToObj(OrderTaxServiceFixtures::buildOrderTax)
         .collect(Collectors.toList());
