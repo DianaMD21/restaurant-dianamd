@@ -16,4 +16,5 @@ public final class IocControllers {
   public static final String STOCK_CONTROLLER = "stockController";
   public static final String STOCK_PRODUCT_CONTROLLER = "stockProductController";
   public static final String TAX_CONTROLLER = "taxController";
+  public static final String WAITER_CONTROLLER = "waiterController";
 }
