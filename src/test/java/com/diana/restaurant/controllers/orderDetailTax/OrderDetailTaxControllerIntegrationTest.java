@@ -50,7 +50,8 @@ public class OrderDetailTaxControllerIntegrationTest {
   public void delete_ShouldDeleteOrderDetailTax() {
     var orderDetailTaxes = OrderDetailTaxServiceFixtures.buildOrderDetailTaxes(3);
     orderDetailTaxes.stream().forEach(orderDetailTaxController::add);
-    var deletedOrderDetailTax = orderDetailTaxController.deleteById(orderDetailTaxes.get(0).getId());
+    var deletedOrderDetailTax =
+        orderDetailTaxController.deleteById(orderDetailTaxes.get(0).getId());
     var deletedOrderDetailTaxToVerify =
         OrderDetailTaxServiceFixtures.buildOrderDetailTax(orderDetailTaxes.get(0));
     Assertions.assertEquals(deletedOrderDetailTax, orderDetailTaxes.get(0));
