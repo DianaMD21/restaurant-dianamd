@@ -1,7 +1,7 @@
 package com.diana.restaurant.ioc;
 
+import com.diana.restaurant.exceptions.KeyNotFoundException;
 import com.diana.restaurant.exceptions.ioc.IocDuplicatedKeyException;
-import com.diana.restaurant.exceptions.ioc.IocKeyNotFoundException;
 import com.diana.restaurant.exceptions.ioc.IocKeyNullPointerException;
 import com.diana.restaurant.exceptions.ioc.IocValueNullPointerException;
 import com.diana.restaurant.util.fixtures.ioc.IocFixtures;
@@ -46,7 +46,7 @@ public class IocTest {
 
   @Test()
   public void get_ShouldThrowIocKeyNotFoundException() {
-    Assertions.assertThrows(IocKeyNotFoundException.class, () -> ioc.get("KeyTest1"));
+    Assertions.assertThrows(KeyNotFoundException.class, () -> ioc.get("KeyTest1"));
   }
 
   @Test
