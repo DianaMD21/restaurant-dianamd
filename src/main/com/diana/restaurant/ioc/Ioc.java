@@ -17,11 +17,13 @@ import com.diana.restaurant.controllers.StockProductController;
 import com.diana.restaurant.controllers.TaxController;
 import com.diana.restaurant.controllers.WaiterController;
 import com.diana.restaurant.enums.IocControllers;
+import com.diana.restaurant.enums.IocQueueManager;
 import com.diana.restaurant.enums.IocServices;
+import com.diana.restaurant.exceptions.KeyNotFoundException;
 import com.diana.restaurant.exceptions.ioc.IocDuplicatedKeyException;
-import com.diana.restaurant.exceptions.ioc.IocKeyNotFoundException;
 import com.diana.restaurant.exceptions.ioc.IocKeyNullPointerException;
 import com.diana.restaurant.exceptions.ioc.IocValueNullPointerException;
+import com.diana.restaurant.queue.QueueManager;
 import com.diana.restaurant.services.implementation.CashierServiceImpl;
 import com.diana.restaurant.services.implementation.ChefServiceImpl;
 import com.diana.restaurant.services.implementation.ClientServiceImpl;
@@ -49,6 +51,12 @@ public class Ioc {
   private Ioc() {
     this.registerServices(this.instanceMap);
     this.registerControllers(this.instanceMap);
+    this.registerQueueManager(this.instanceMap);
+  }
+
+  private void registerQueueManager(Map<String, Object> instanceMap) {
+    instanceMap.put(
+        IocQueueManager.QUEUE_MANAGER, new QueueManager(this.get(IocQueueManager.QUEUE_MANAGER)));
   }
 
   private void registerControllers(Map<String, Object> instanceMap) {
@@ -144,6 +152,8 @@ public class Ioc {
 
   public <T> T get(String key) {
     Optional.ofNullable(key).orElseThrow(IocKeyNullPointerException::new);
-    return (T) Optional.ofNullable(instanceMap.get(key)).orElseThrow(IocKeyNotFoundException::new);
+    return (T)
+        Optional.ofNullable(instanceMap.get(key))
+            .orElseThrow(() -> new KeyNotFoundException("Ioc"));
   }
 }
